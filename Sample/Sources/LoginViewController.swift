@@ -33,7 +33,7 @@ final class LoginViewController: ViewController {
         versionLabel.text = "Demo Project\nStream Swift SDK v.\(Environment.version)"
         
         let autoLogin = storedValue(key: .apiKey) != nil
-        apiKeyLabel.text = storedValue(key: .apiKey, default: "qk4nn7rpcn75")
+        apiKeyLabel.text = storedValue(key: .apiKey, default: "ktavgqhy2x6d")
         userIdLabel.text = storedValue(key: .userId, default: User.user1.id)
         userNameLabel.text = storedValue(key: .userName, default: User.user1.name)
         tokenLabel.text = storedValue(key: .token, default: Token.token1)
@@ -117,8 +117,8 @@ final class LoginViewController: ViewController {
         loggedInToken = token
         
         if !clientSetupped {
-            let config = Client.Config(apiKey: apiKey, baseURL: .usEast, logOptions: .info)
-            Client.configureShared(config)
+            let config = Client.Config(apiKey: apiKey, baseURL: "https://chat-proxy-oregon.stream-io-api.com", logOptions: .info)
+            Client.configureShared(config!)
 
             Notifications.shared.clearApplicationIconBadgeNumberOnAppActive = true
             store(key: .apiKey, value: apiKey)
@@ -204,12 +204,12 @@ final class LoginViewController: ViewController {
 // MARK: Test Users
 
 extension User {
-    static let user1 = User(id: "broken-waterfall-5")
+    static let user1 = User(id: "tommaso")
     static let user2 = User(id: "steep-moon-9")
 }
 
 extension Token {
-    static let token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYnJva2VuLXdhdGVyZmFsbC01In0.d1xKTlD_D0G-VsBoDBNbaLjO-2XWNA8rlTm4ru4sMHg"
+    static let token1 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidG9tbWFzbyJ9.cP8Um41QRjib08lTnCi070s6TPYHe69ZycO38NipwII"
     static let token2 = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoic3RlZXAtbW9vbi05In0.K7uZEqKmiVb5_Y7XFCmlz64SzOV34hoMpeqRSz7g4YI"
 }
 
