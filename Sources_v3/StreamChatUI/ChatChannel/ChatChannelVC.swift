@@ -19,6 +19,7 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
         
     public private(set) lazy var collectionView: UICollectionView = {
         let layout = uiConfig.messageList.collectionLayout.init()
+        layout.delegate = self
         let collection = uiConfig.messageList.collectionView.init(layout: layout)
         collection.register(
             СhatIncomingMessageCollectionViewCell<ExtraData>.self,
@@ -35,6 +36,8 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
         return collection
     }()
 
+    let cellSizer = СhatMessageCollectionViewCellLayoutManager<ExtraData>()
+
     private var navbarListener: ChatChannelNavigationBarListener<ExtraData>?
     private var activePopup: ChatMessagePopupViewController<ExtraData>?
     
@@ -49,6 +52,12 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
 
         installLongPress()
         setupMessageComposer()
+    }
+
+    override open func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let rect = CGRect(x: 0, y: collectionView.contentSize.height - 1, width: 1, height: 1)
+        collectionView.scrollRectToVisible(rect, animated: false)
     }
 
     override open func setUpLayout() {
@@ -178,6 +187,7 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
             ) as! СhatIncomingMessageCollectionViewCell<ExtraData>
         }
 
+        cell.layout = cellSizer.layoutForCell(with: message, limitedBy: collectionView.bounds.width)
         cell.message = message
 
         return cell
@@ -243,6 +253,18 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
     }
 }
 
+// MARK: - ChatChannelCollectionViewLayoutDelegate
+
+extension ChatChannelVC: ChatChannelCollectionViewLayoutDelegate {
+    public func createLayoutModel() -> ChatChannelCollectionViewLayoutModel {
+        let width = collectionView.bounds.width
+        let heights = (0..<controller.messages.count)
+            .map { messageGroupPart(at: IndexPath(item: $0, section: 0)) }
+            .map { cellSizer.heightForCell(with: $0, limitedBy: width) }
+        return ChatChannelCollectionViewLayoutModel(forWidth: width, itemHeights: heights)
+    }
+}
+
 // MARK: - _ChatChannelControllerDelegate
 
 extension ChatChannelVC: _ChatChannelControllerDelegate {
@@ -250,6 +272,8 @@ extension ChatChannelVC: _ChatChannelControllerDelegate {
         _ channelController: _ChatChannelController<ExtraData>,
         didUpdateMessages changes: [ListChange<_ChatMessage<ExtraData>>]
     ) {
+        // in ideal world, we would recalculate layoutModel for new data right here
+        // and set layoutModel inside batchUpdates. But right now let's roll with what we got
         collectionView.performBatchUpdates({
             for change in changes {
                 switch change {
