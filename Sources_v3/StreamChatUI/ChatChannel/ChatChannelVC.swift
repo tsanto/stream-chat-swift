@@ -236,7 +236,10 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
         return .init(
             message: message,
             parentMessageState: parentMessageState,
-            isLastInGroup: isLastInGroup
+            isLastInGroup: isLastInGroup,
+            didTapOnAttachment: { attachment in
+                debugPrint(attachment)
+            }
         )
     }
 }

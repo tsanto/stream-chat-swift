@@ -59,7 +59,7 @@ open class ChatRepliedMessageContentView<ExtraData: UIExtraDataTypes>: View {
 
     override open func updateContent() {
         messageBubbleView.message = message.flatMap {
-            .init(message: $0, parentMessageState: nil, isLastInGroup: true)
+            .init(message: $0, parentMessageState: nil, isLastInGroup: true, didTapOnAttachment: nil)
         }
 
         let placeholder = UIImage(named: "pattern1", in: .streamChatUI)
@@ -133,7 +133,12 @@ extension ChatRepliedMessageContentView {
             }
             let spacing: CGFloat = uiConfig.messageList.defaultMargins
             let avatarSize = CGSize(width: 24, height: 24)
-            let group = _ChatMessageGroupPart(message: message, parentMessageState: nil, isLastInGroup: true)
+            let group = _ChatMessageGroupPart(
+                message: message,
+                parentMessageState: nil,
+                isLastInGroup: true,
+                didTapOnAttachment: nil
+            )
             let bubbleSize = bubbleSizer.sizeForView(with: group, limitedBy: width - avatarSize.width - spacing)
             let height = max(avatarSize.height, bubbleSize.height)
             return CGSize(width: avatarSize.width + spacing + bubbleSize.width, height: height)
@@ -161,7 +166,12 @@ extension ChatRepliedMessageContentView {
                 ? width - avatarSize.width
                 : 0
 
-            let group = _ChatMessageGroupPart(message: message, parentMessageState: nil, isLastInGroup: true)
+            let group = _ChatMessageGroupPart(
+                message: message,
+                parentMessageState: nil,
+                isLastInGroup: true,
+                didTapOnAttachment: nil
+            )
             let bubbleSize = bubbleSizer.sizeForView(with: group, limitedBy: width - avatarSize.width - spacing)
 
             let avatarFrame = CGRect(origin: CGPoint(x: avatarOffsetX, y: height - avatarSize.height), size: avatarSize)

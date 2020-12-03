@@ -18,17 +18,17 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
     var layout: Layout? {
         didSet { setNeedsLayout() }
     }
-    
+
     public var message: _ChatMessageGroupPart<ExtraData>? {
         didSet { updateContent() }
     }
 
     public let showRepliedMessage: Bool
-    
+
     // MARK: - Subviews
 
     public private(set) var attachments: [UIView] = []
-    
+
     public private(set) lazy var textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
@@ -44,23 +44,30 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         return textView
     }()
 
+    public private(set) lazy var imageGallery = uiConfig
+        .messageList
+        .messageContentSubviews
+        .imageGallery
+        .init()
+        .withoutAutoresizingMaskConstraints
+
     public private(set) lazy var repliedMessageView = showRepliedMessage
         ? uiConfig.messageList.messageContentSubviews.repliedMessageContentView.init()
         : nil
-    
+
     public private(set) lazy var borderLayer = CAShapeLayer()
 
     // MARK: - Init
-    
+
     public required init(showRepliedMessage: Bool) {
         self.showRepliedMessage = showRepliedMessage
 
         super.init(frame: .zero)
     }
-    
+
     public required init?(coder: NSCoder) {
         showRepliedMessage = false
-        
+
         super.init(coder: coder)
     }
 
@@ -100,7 +107,10 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         if let reply = repliedMessageView {
             addSubview(reply)
         }
+        addSubview(imageGallery)
         addSubview(textView)
+        // imageGallery.widthAnchor.constraint(equalTo: imageGallery.heightAnchor).isActive = true
+        // imageGallery.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2).isActive = true
     }
 
     override open func updateContent() {
@@ -119,8 +129,13 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         layer.maskedCorners = corners
 
         // add attachments subviews
+        imageGallery.imageAttachments = message?.attachments
+            .filter { $0.type == .image }
+            .sorted { $0.imageURL?.absoluteString ?? "" < $1.imageURL?.absoluteString ?? "" } ?? []
+        imageGallery.didTapOnAttachment = message?.didTapOnAttachment
+        imageGallery.isHidden = imageGallery.imageAttachments.isEmpty
     }
-    
+
     // MARK: - Private
 
     private var corners: CACornerMask {
@@ -130,7 +145,7 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
             .layerMaxXMinYCorner,
             .layerMaxXMaxYCorner
         ]
-        
+
         switch (message?.isLastInGroup, message?.isSentByCurrentUser) {
         case (true, true):
             roundedCorners.remove(.layerMaxXMaxYCorner)
@@ -139,7 +154,7 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         default:
             break
         }
-        
+
         return roundedCorners
     }
 }
