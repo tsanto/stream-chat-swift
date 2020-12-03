@@ -42,6 +42,7 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
     override open func viewDidLoad() {
         super.viewDidLoad()
 
+        layoutCache = Array(repeating: nil, count: controller.messages.count)
         controller.setDelegate(self)
         controller.synchronize()
         navigationItem.largeTitleDisplayMode = .never
@@ -198,6 +199,18 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
     
     // MARK: - Private
 
+    var layoutCache: [(CGFloat, СhatMessageCollectionViewCell<ExtraData>.Layout)?] = []
+    private func layoutForCell(at indexPath: IndexPath) -> СhatMessageCollectionViewCell<ExtraData>.Layout {
+        let collectionWidth = collectionView.bounds.width
+        if let (width, cached) = layoutCache[indexPath.item], width == collectionWidth {
+            return cached
+        }
+        let message = messageGroupPart(at: indexPath)
+        let layout = cellSizer.layoutForCell(with: message, limitedBy: collectionWidth)
+        layoutCache[indexPath.item] = (collectionView.bounds.width, layout)
+        return layout
+    }
+
     private func messageGroupPart(at indexPath: IndexPath) -> _ChatMessageGroupPart<ExtraData> {
         let message = controller.messages[indexPath.row]
         
@@ -272,12 +285,17 @@ extension ChatChannelVC: _ChatChannelControllerDelegate {
             for change in changes {
                 switch change {
                 case let .insert(_, index):
+                    layoutCache.insert(nil, at: index.item)
                     collectionView.insertItems(at: [index])
                 case let .move(_, fromIndex, toIndex):
+                    let value = layoutCache.remove(at: fromIndex.item)
+                    layoutCache.insert(value, at: toIndex.item)
                     collectionView.moveItem(at: fromIndex, to: toIndex)
                 case let .remove(_, index):
+                    layoutCache.remove(at: index.item)
                     collectionView.deleteItems(at: [index])
                 case let .update(_, index):
+                    layoutCache[index.item] = nil
                     collectionView.reloadItems(at: [index])
                 }
             }

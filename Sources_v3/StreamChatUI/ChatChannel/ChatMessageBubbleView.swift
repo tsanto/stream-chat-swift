@@ -175,7 +175,13 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
 
 extension ChatMessageBubbleView {
     class LayoutProvider: ConfiguredLayoutProvider<ExtraData> {
+        private struct Wrap: Hashable {
+            let text: String
+            let width: CGFloat
+        }
+
         let textView: UITextView = ChatMessageBubbleView(showRepliedMessage: false).textView
+        private var textCache: [Wrap: CGSize] = [:]
         let gallerySizer = ChatMessageImageGallery<ExtraData>.LayoutProvider()
 
         /// reply sizer depends on bubble sizer, circle dependency
@@ -215,10 +221,7 @@ extension ChatMessageBubbleView {
 
             var textSize: CGSize = .zero
             if !data.text.isEmpty {
-                textSize = {
-                    textView.text = data.message.text
-                    return textView.sizeThatFits(CGSize(width: workWidth, height: .greatestFiniteMagnitude))
-                }()
+                textSize = sizeForText(data.message.text, in: workWidth)
                 spacings += margins
             }
 
@@ -264,10 +267,7 @@ extension ChatMessageBubbleView {
                 offsetY += margins
             }
 
-            let textSize: CGSize = {
-                textView.text = data.message.text
-                return textView.sizeThatFits(CGSize(width: workWidth, height: .greatestFiniteMagnitude))
-            }()
+            let textSize = sizeForText(data.message.text, in: workWidth)
             var textFrame: CGRect?
             if !data.text.isEmpty {
                 textFrame = CGRect(origin: CGPoint(x: margins, y: offsetY), size: textSize)
@@ -283,6 +283,17 @@ extension ChatMessageBubbleView {
                 galleryLayout: galleryLayout,
                 attachments: attachments
             )
+        }
+
+        func sizeForText(_ text: String, in width: CGFloat) -> CGSize {
+            let wrap = Wrap(text: text, width: width)
+            if let cached = textCache[wrap] {
+                return cached
+            }
+            textView.text = text
+            let size = textView.sizeThatFits(CGSize(width: width, height: .greatestFiniteMagnitude))
+            textCache[wrap] = size
+            return size
         }
     }
 }
