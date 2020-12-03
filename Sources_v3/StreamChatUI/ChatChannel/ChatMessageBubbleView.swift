@@ -35,6 +35,13 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         return textView
     }()
 
+    public private(set) lazy var imageGallery = uiConfig
+        .messageList
+        .messageContentSubviews
+        .imageGallery
+        .init()
+        .withoutAutoresizingMaskConstraints
+    
     public private(set) lazy var repliedMessageView = showRepliedMessage ?
         uiConfig.messageList.messageContentSubviews.repliedMessageContentView.init().withoutAutoresizingMaskConstraints :
         nil
@@ -78,7 +85,11 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         if let repliedMessageView = repliedMessageView {
             stackView.addArrangedSubview(repliedMessageView)
         }
+        stackView.addArrangedSubview(imageGallery)
         stackView.addArrangedSubview(textView)
+
+        imageGallery.widthAnchor.constraint(equalTo: imageGallery.heightAnchor).isActive = true
+        imageGallery.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2).isActive = true
     }
 
     override open func updateContent() {
@@ -97,6 +108,12 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
 
         backgroundColor = message?.isSentByCurrentUser == true ? .outgoingMessageBubbleBackground : .incomingMessageBubbleBackground
         layer.maskedCorners = corners
+
+        imageGallery.imageAttachments = message?.attachments
+            .filter { $0.type == .image }
+            .sorted { $0.imageURL?.absoluteString ?? "" < $1.imageURL?.absoluteString ?? "" } ?? []
+        imageGallery.didTapOnAttachment = message?.didTapOnAttachment
+        imageGallery.isHidden = imageGallery.imageAttachments.isEmpty
     }
     
     // MARK: - Private
