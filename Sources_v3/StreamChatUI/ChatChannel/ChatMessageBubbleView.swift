@@ -133,11 +133,21 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         backgroundColor = message?.isSentByCurrentUser == true ? .outgoingMessageBubbleBackground : .incomingMessageBubbleBackground
         layer.maskedCorners = corners
 
-        // add attachments subviews
         imageGallery.imageAttachments = message?.attachments
             .filter { $0.type == .image }
             .sorted { $0.imageURL?.absoluteString ?? "" < $1.imageURL?.absoluteString ?? "" } ?? []
         imageGallery.didTapOnAttachment = message?.didTapOnAttachment
+
+        // add attachments subviews
+        attachments.forEach { $0.removeFromSuperview() }
+        attachments = message?.attachments
+            .filter { $0.type != .image }
+            .map { _ in
+                let view = UIView()
+                view.backgroundColor = .purple
+                return view
+            } ?? []
+        attachments.forEach { addSubview($0) }
     }
 
     // MARK: - Private
@@ -196,6 +206,12 @@ extension ChatMessageBubbleView {
             }
 
             // put attachments here
+            var attachmentsSize: CGSize = .zero
+            for attachment in data.attachments where attachment.type != .image {
+                attachmentsSize.width = workWidth
+                attachmentsSize.height += 50
+                spacings += margins
+            }
 
             var textSize: CGSize = .zero
             if !data.text.isEmpty {
@@ -206,8 +222,8 @@ extension ChatMessageBubbleView {
                 spacings += margins
             }
 
-            let width = 2 * margins + max(replySize.width, textSize.width, gallerySize.width)
-            let height = spacings + replySize.height + textSize.height + gallerySize.height
+            let width = 2 * margins + max(replySize.width, textSize.width, gallerySize.width, attachmentsSize.width)
+            let height = spacings + replySize.height + textSize.height + gallerySize.height + attachmentsSize.height
             return CGSize(width: max(width, 32), height: max(height, 32))
         }
 
@@ -229,7 +245,6 @@ extension ChatMessageBubbleView {
                 offsetY += margins
             }
 
-            // put attachments here
             var galleryFrame: CGRect?
             var galleryLayout: ChatMessageImageGallery<ExtraData>.Layout?
             let images: Array = data.attachments.filter { $0.type == .image }
@@ -238,6 +253,14 @@ extension ChatMessageBubbleView {
                 galleryFrame = CGRect(origin: CGPoint(x: margins, y: offsetY), size: gallerySize)
                 galleryLayout = gallerySizer.layoutForView(with: images, of: gallerySize)
                 offsetY += gallerySize.height
+                offsetY += margins
+            }
+
+            // put attachments here
+            var attachments: [CGRect] = []
+            for attachment in data.attachments where attachment.type != .image {
+                attachments.append(CGRect(x: margins, y: offsetY, width: workWidth, height: 50))
+                offsetY += 50
                 offsetY += margins
             }
 
@@ -258,7 +281,7 @@ extension ChatMessageBubbleView {
                 repliesMessageLayout: replyLayout,
                 gallery: galleryFrame,
                 galleryLayout: galleryLayout,
-                attachments: []
+                attachments: attachments
             )
         }
     }
