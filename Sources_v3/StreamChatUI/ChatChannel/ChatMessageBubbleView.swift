@@ -20,6 +20,8 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         stack.spacing = UIStackView.spacingUseSystem
         return stack
     }()
+
+    private var attachmentViews: [UIView] = []
     
     public private(set) lazy var textView: UITextView = {
         let textView = UITextView()
@@ -115,6 +117,18 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
             .sorted { $0.imageURL?.absoluteString ?? "" < $1.imageURL?.absoluteString ?? "" } ?? []
         imageGallery.didTapOnAttachment = message?.didTapOnAttachment
         imageGallery.isHidden = imageGallery.imageAttachments.isEmpty
+
+        attachmentViews.forEach { $0.removeFromSuperview() }
+        attachmentViews = message?.attachments
+            .filter { $0.type != .image }
+            .map { _ in ChatMessageAttachmentView() } ?? []
+        var attachmentsIndex = stackView.arrangedSubviews.count
+        if !textView.isHidden {
+            attachmentsIndex -= 1
+        }
+        attachmentViews.enumerated().forEach { idx, view in
+            stackView.insertArrangedSubview(view, at: attachmentsIndex + idx)
+        }
     }
     
     // MARK: - Private
@@ -138,4 +152,17 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         
         return roundedCorners
     }
+}
+
+class ChatMessageAttachmentView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .purple
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalToConstant: 50).isActive = true
+        widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+    }
+
+    @available(*, unavailable, message: "Class can not be used in Interface Builder")
+    required init?(coder: NSCoder) { fatalError("Class can not be used in Interface Builder") }
 }
