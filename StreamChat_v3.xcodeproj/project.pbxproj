@@ -510,6 +510,7 @@
 		DB70CFFB25702EB900DDF436 /* ChatMessagePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70CFFA25702EB900DDF436 /* ChatMessagePopupViewController.swift */; };
 		DB70D002257119C500DDF436 /* ChatMessageReactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70D001257119C500DDF436 /* ChatMessageReactionsView.swift */; };
 		E73A8B2B2578EB2B00FBDC56 /* MessageComposerInputAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E73A8B2A2578EB2B00FBDC56 /* MessageComposerInputAccessoryViewController.swift */; };
+		DB781C9825790A1B00E5FDB5 /* ConfiguredLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB781C9725790A1B00E5FDB5 /* ConfiguredLayoutProvider.swift */; };
 		E759AC4D256E694F00341865 /* OnlineIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E759AC4C256E694F00341865 /* OnlineIndicatorView.swift */; };
 		F61D7C3124FF9D1F00188A0E /* MessageEndpoints_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61D7C3024FF9D1F00188A0E /* MessageEndpoints_Tests.swift */; };
 		F61D7C3324FFA60600188A0E /* MessageUpdater_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61D7C3224FFA60600188A0E /* MessageUpdater_Mock.swift */; };
@@ -1149,6 +1150,7 @@
 		DB70CFFA25702EB900DDF436 /* ChatMessagePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagePopupViewController.swift; sourceTree = "<group>"; };
 		DB70D001257119C500DDF436 /* ChatMessageReactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageReactionsView.swift; sourceTree = "<group>"; };
 		E73A8B2A2578EB2B00FBDC56 /* MessageComposerInputAccessoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageComposerInputAccessoryViewController.swift; sourceTree = "<group>"; };
+		DB781C9725790A1B00E5FDB5 /* ConfiguredLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguredLayoutProvider.swift; sourceTree = "<group>"; };
 		E759AC4C256E694F00341865 /* OnlineIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineIndicatorView.swift; sourceTree = "<group>"; };
 		F61D7C3024FF9D1F00188A0E /* MessageEndpoints_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndpoints_Tests.swift; sourceTree = "<group>"; };
 		F61D7C3224FFA60600188A0E /* MessageUpdater_Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUpdater_Mock.swift; sourceTree = "<group>"; };
@@ -1349,6 +1351,7 @@
 				79088331254876C100896F03 /* ChatChannelCollectionView.swift */,
 				79088330254876C100896F03 /* ChatChannelCollectionViewLayout.swift */,
 				7908832E254876C100896F03 /* ChatMessageCollectionViewCell.swift */,
+				DB781C9725790A1B00E5FDB5 /* ConfiguredLayoutProvider.swift */,
 				88A8CF15256E7BDA004EA4C7 /* ChatMessageContentView.swift */,
 				88A8CF1F256E7C06004EA4C7 /* ChatMessageBubbleView.swift */,
 				88A8CF25256E7C31004EA4C7 /* ChatMessageMetadataView.swift */,
@@ -2933,6 +2936,7 @@
 				221742D5256DC97F005B257C /* MessageComposerAttachmentsView.swift in Sources */,
 				885B3D7D25642B88003E6BDF /* CreateNewChannelButton.swift in Sources */,
 				792DD9D9256BC542001DB91B /* BaseViews.swift in Sources */,
+				DB781C9825790A1B00E5FDB5 /* ConfiguredLayoutProvider.swift in Sources */,
 				79088334254876EA00896F03 /* ChatChannelVC.swift in Sources */,
 				228DC80E25704B410080A49F /* MessageComposerAttachmentCellView.swift in Sources */,
 				79088334254876EA00896F03 /* ChatChannelVC.swift in Sources */,
