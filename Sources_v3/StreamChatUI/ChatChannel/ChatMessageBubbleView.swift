@@ -12,6 +12,8 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         /// must be ChatRepliedMessageContentView<ExtraData>.Layout?
         /// but it's circular dependency, swift confused
         let repliesMessageLayout: Any?
+        let gallery: CGRect?
+        let galleryLayout: ChatMessageImageGallery<ExtraData>.Layout?
         let attachments: [CGRect]
     }
 
@@ -49,7 +51,6 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         .messageContentSubviews
         .imageGallery
         .init()
-        .withoutAutoresizingMaskConstraints
 
     public private(set) lazy var repliedMessageView = showRepliedMessage
         ? uiConfig.messageList.messageContentSubviews.repliedMessageContentView.init()
@@ -89,6 +90,12 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         }
         repliedMessageView?.layout = layout?.repliesMessageLayout as? ChatRepliedMessageContentView<ExtraData>.Layout
 
+        imageGallery.isHidden = layout?.gallery == nil
+        if let frame = layout?.gallery {
+            imageGallery.frame = frame
+        }
+        imageGallery.layout = layout?.galleryLayout
+
         if let attachmentFrames = layout?.attachments {
             zip(attachments, attachmentFrames).forEach {
                 $0.frame = $1
@@ -109,8 +116,6 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         }
         addSubview(imageGallery)
         addSubview(textView)
-        // imageGallery.widthAnchor.constraint(equalTo: imageGallery.heightAnchor).isActive = true
-        // imageGallery.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 2).isActive = true
     }
 
     override open func updateContent() {
@@ -133,7 +138,6 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
             .filter { $0.type == .image }
             .sorted { $0.imageURL?.absoluteString ?? "" < $1.imageURL?.absoluteString ?? "" } ?? []
         imageGallery.didTapOnAttachment = message?.didTapOnAttachment
-        imageGallery.isHidden = imageGallery.imageAttachments.isEmpty
     }
 
     // MARK: - Private
@@ -162,6 +166,7 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
 extension ChatMessageBubbleView {
     class LayoutProvider: ConfiguredLayoutProvider<ExtraData> {
         let textView: UITextView = ChatMessageBubbleView(showRepliedMessage: false).textView
+        let gallerySizer = ChatMessageImageGallery<ExtraData>.LayoutProvider()
 
         /// reply sizer depends on bubble sizer, circle dependency
         /// but bubble inside reply don't need reply sizer so it should be fine as long as you not access it unless needed
@@ -183,6 +188,13 @@ extension ChatMessageBubbleView {
                 spacings += margins
             }
 
+            var gallerySize: CGSize = .zero
+            let images: Array = data.attachments.filter { $0.type == .image }
+            if !images.isEmpty {
+                gallerySize = gallerySizer.sizeForView(with: images, limitedBy: workWidth)
+                spacings += margins
+            }
+
             // put attachments here
 
             var textSize: CGSize = .zero
@@ -194,8 +206,8 @@ extension ChatMessageBubbleView {
                 spacings += margins
             }
 
-            let width = 2 * margins + max(replySize.width, textSize.width)
-            let height = spacings + replySize.height + textSize.height
+            let width = 2 * margins + max(replySize.width, textSize.width, gallerySize.width)
+            let height = spacings + replySize.height + textSize.height + gallerySize.height
             return CGSize(width: max(width, 32), height: max(height, 32))
         }
 
@@ -218,6 +230,16 @@ extension ChatMessageBubbleView {
             }
 
             // put attachments here
+            var galleryFrame: CGRect?
+            var galleryLayout: ChatMessageImageGallery<ExtraData>.Layout?
+            let images: Array = data.attachments.filter { $0.type == .image }
+            if !images.isEmpty {
+                let gallerySize = gallerySizer.sizeForView(with: images, limitedBy: workWidth)
+                galleryFrame = CGRect(origin: CGPoint(x: margins, y: offsetY), size: gallerySize)
+                galleryLayout = gallerySizer.layoutForView(with: images, of: gallerySize)
+                offsetY += gallerySize.height
+                offsetY += margins
+            }
 
             let textSize: CGSize = {
                 textView.text = data.message.text
@@ -234,6 +256,8 @@ extension ChatMessageBubbleView {
                 text: textFrame,
                 repliedMessage: replyFrame,
                 repliesMessageLayout: replyLayout,
+                gallery: galleryFrame,
+                galleryLayout: galleryLayout,
                 attachments: []
             )
         }

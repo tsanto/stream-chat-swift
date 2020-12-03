@@ -7,6 +7,17 @@ import StreamChat
 import UIKit
 
 open class ChatMessageImageGallery<ExtraData: UIExtraDataTypes>: View, UIConfigProvider {
+    struct Layout {
+        let preview1: CGRect?
+        let preview2: CGRect?
+        let preview3: CGRect?
+        let moreOverlay: CGRect?
+    }
+
+    var layout: Layout? {
+        didSet { setNeedsLayout() }
+    }
+
     public var didTapOnAttachment: ((_ChatMessageAttachment<ExtraData>) -> Void)? {
         didSet { updateContent() }
     }
@@ -27,7 +38,7 @@ open class ChatMessageImageGallery<ExtraData: UIExtraDataTypes>: View, UIConfigP
         label.font = .preferredFont(forTextStyle: .largeTitle)
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .center
-        return label.withoutAutoresizingMaskConstraints
+        return label
     }()
 
     // MARK: - Overrides
@@ -42,23 +53,25 @@ open class ChatMessageImageGallery<ExtraData: UIExtraDataTypes>: View, UIConfigP
     override open func layoutSubviews() {
         super.layoutSubviews()
 
-        if imageAttachments.count == 1 {
-            preview1.frame = bounds
-        } else if imageAttachments.count == 2 {
-            preview1.frame = CGRect(x: 0, y: 0, width: bounds.width / 2, height: bounds.height)
-            preview2.frame = CGRect(x: preview1.frame.maxX, y: 0, width: bounds.width / 2, height: bounds.height)
-        } else {
-            preview1.frame = CGRect(x: 0, y: 0, width: bounds.width / 2, height: bounds.height)
-            preview2.frame = CGRect(x: preview1.frame.maxX, y: 0, width: bounds.width / 2, height: bounds.height / 2)
-            preview3.frame = CGRect(
-                x: preview2.frame.minX,
-                y: preview2.frame.maxY,
-                width: bounds.width / 2,
-                height: bounds.height / 2
-            )
+        preview1.isHidden = layout?.preview1 == nil
+        if let frame = layout?.preview1 {
+            preview1.frame = frame
         }
 
-        moreImagesOverlay.frame = preview3.frame
+        preview2.isHidden = layout?.preview2 == nil
+        if let frame = layout?.preview2 {
+            preview2.frame = frame
+        }
+
+        preview3.isHidden = layout?.preview3 == nil
+        if let frame = layout?.preview3 {
+            preview3.frame = frame
+        }
+
+        moreImagesOverlay.isHidden = layout?.moreOverlay == nil
+        if let frame = layout?.moreOverlay {
+            moreImagesOverlay.frame = frame
+        }
     }
 
     override open func defaultAppearance() {
@@ -80,9 +93,6 @@ open class ChatMessageImageGallery<ExtraData: UIExtraDataTypes>: View, UIConfigP
         }
 
         moreImagesOverlay.text = "+\(imageAttachments.count - 3)"
-        moreImagesOverlay.isHidden = imageAttachments.count < 4
-
-        setNeedsLayout()
     }
 
     // MARK: - Private
@@ -93,7 +103,6 @@ open class ChatMessageImageGallery<ExtraData: UIExtraDataTypes>: View, UIConfigP
             .messageContentSubviews
             .imageGalleryItem
             .init()
-            .withoutAutoresizingMaskConstraints
     }
 }
 
@@ -170,6 +179,46 @@ extension ChatMessageImageGallery {
 
         deinit {
             imageTask = nil
+        }
+    }
+}
+
+extension ChatMessageImageGallery {
+    class LayoutProvider: ConfiguredLayoutProvider<ExtraData> {
+        func heightForView(with data: [_ChatMessageAttachment<ExtraData>], limitedBy width: CGFloat) -> CGFloat {
+            sizeForView(with: data, limitedBy: width).height
+        }
+
+        func sizeForView(with data: [_ChatMessageAttachment<ExtraData>], limitedBy width: CGFloat) -> CGSize {
+            CGSize(width: width, height: width)
+        }
+
+        func layoutForView(
+            with data: [_ChatMessageAttachment<ExtraData>],
+            of size: CGSize
+        ) -> Layout {
+            if data.count == 1 {
+                return Layout(
+                    preview1: CGRect(origin: .zero, size: size),
+                    preview2: nil,
+                    preview3: nil,
+                    moreOverlay: nil
+                )
+            }
+            if data.count == 2 {
+                return Layout(
+                    preview1: CGRect(x: 0, y: 0, width: size.width / 2, height: size.height),
+                    preview2: CGRect(x: size.width / 2, y: 0, width: size.width / 2, height: size.height),
+                    preview3: nil,
+                    moreOverlay: nil
+                )
+            }
+            return Layout(
+                preview1: CGRect(x: 0, y: 0, width: size.width / 2, height: size.height),
+                preview2: CGRect(x: size.width / 2, y: 0, width: size.width / 2, height: size.height / 2),
+                preview3: CGRect(x: size.width / 2, y: size.height / 2, width: size.width / 2, height: size.height / 2),
+                moreOverlay: CGRect(x: size.width / 2, y: size.height / 2, width: size.width / 2, height: size.height / 2)
+            )
         }
     }
 }
