@@ -24,6 +24,11 @@ open class ChatChannelCollectionViewLayout: UICollectionViewFlowLayout {
     }
     
     // MARK: - Overrides
+
+    override open var collectionViewContentSize: CGSize {
+        let size = super.collectionViewContentSize
+        return CGSize(width: size.width, height: 100_000)
+    }
     
     override open func prepare() {
         super.prepare()

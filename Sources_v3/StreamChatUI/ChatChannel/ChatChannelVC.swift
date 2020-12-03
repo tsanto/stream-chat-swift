@@ -189,7 +189,17 @@ open class ChatChannelVC<ExtraData: UIExtraDataTypes>: ViewController,
         let selectedMessage = controller.messages[indexPath.row]
         debugPrint(selectedMessage)
     }
-    
+
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if indexPath.item + 2 == controller.messages.count {
+            controller.loadNextMessages()
+        }
+    }
+
     // MARK: - UIScrollViewDelegate
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
