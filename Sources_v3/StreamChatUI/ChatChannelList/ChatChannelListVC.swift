@@ -87,7 +87,10 @@ open class ChatChannelListVC<ExtraData: UIExtraDataTypes>: ViewController,
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let channel = controller.channels[indexPath.row]
-        router.openChat(for: channel)
+//        router.openChat(for: channel)
+        let chatScreen = ChatChannelVC<ExtraData>()
+        chatScreen.controller = controller.client.channelController(for: channel.cid)
+        navigationController?.pushViewController(chatScreen, animated: true)
     }
     
     // MARK: - UIScrollViewDelegate

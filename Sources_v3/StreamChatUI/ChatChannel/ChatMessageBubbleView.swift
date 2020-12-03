@@ -40,6 +40,7 @@ open class ChatMessageBubbleView<ExtraData: UIExtraDataTypes>: View, UIConfigPro
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.isUserInteractionEnabled = false
+        textView.textColor = .black
         return textView
     }()
 
