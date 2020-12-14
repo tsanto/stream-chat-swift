@@ -5,6 +5,8 @@
 import StreamChat
 import UIKit
 
+public typealias DefaultExtraData = StreamChat.DefaultExtraData
+
 public struct UIConfig<ExtraData: ExtraDataTypes> {
     public var channelList = ChannelListUI()
     public var messageList = MessageListUI()

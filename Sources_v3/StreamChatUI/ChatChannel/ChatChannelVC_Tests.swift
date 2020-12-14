@@ -10,8 +10,8 @@ import XCTest
 // ====== Example test only ====
 
 class ChatChannelVC_Tests: XCTestCase {
-    var vc: ChatChannelVC<DefaultUIExtraData>!
-    var channelController: ChatChannelController_Mock<DefaultUIExtraData>!
+    var vc: ChatChannelVC<DefaultExtraData>!
+    var channelController: ChatChannelController_Mock<DefaultExtraData>!
     
     override func setUp() {
         super.setUp()
@@ -21,12 +21,12 @@ class ChatChannelVC_Tests: XCTestCase {
         
         // Load default data
         let cid = ChannelId(type: .messaging, id: "test")
-        let message: _ChatMessage<DefaultUIExtraData> = .mock(
+        let message: _ChatMessage<DefaultExtraData> = .mock(
             id: UUID().uuidString,
             text: "This is a test message",
-            author: .init(id: "luke", name: "Luke Skywalker", imageURL: nil)
+            author: .mock(id: "test_user", name: "Luke")
         )
-        let channel: _ChatChannel<DefaultUIExtraData> = .mock(cid: cid, extraData: .init(name: "Family chat", imageURL: nil))
+        let channel: _ChatChannel<DefaultExtraData> = .mock(cid: cid, name: "Family chat")
         
         channelController.simulateInitial(channel: channel, messages: [message], state: .remoteDataFetched)
     }

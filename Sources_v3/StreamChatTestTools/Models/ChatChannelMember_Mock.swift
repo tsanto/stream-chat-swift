@@ -9,6 +9,8 @@ public extension _ChatChannelMember {
     /// Creates a new `_ChatChannelMember` object from the provided data.
     static func mock(
         id: String,
+        name: String?,
+        imageURL: URL?,
         isOnline: Bool,
         isBanned: Bool,
         userRole: UserRole,
@@ -25,6 +27,8 @@ public extension _ChatChannelMember {
     ) -> _ChatChannelMember {
         .init(
             id: id,
+            name: name,
+            imageURL: imageURL,
             isOnline: isOnline,
             isBanned: isBanned,
             userRole: userRole,
