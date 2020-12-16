@@ -187,14 +187,14 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
             object as AnyObject? === textView,
             keyPath == "contentSize" {
             // not working
-            guard newContentSize != textView.contentSize else { return }
+          //  guard newContentSize != textView.contentSize else { return }
             print("loopdb: observe contentSize \(change?[.init(rawValue: "new")] as? CGSize)")
             composerView.invalidateIntrinsicContentSize()
             //print("loopdb: observe textView.contentSize")
         } else if object as AnyObject? === inputView,
                   keyPath == "safeAreaInsets",
                   let newInsets = change?[.init(rawValue: "new")] as? UIEdgeInsets {
-            guard newInsets != composerView.safeAreaInsets else { return }
+           // guard newInsets != composerView.safeAreaInsets else { return }
             composerView.invalidateIntrinsicContentSize()
         }
     }

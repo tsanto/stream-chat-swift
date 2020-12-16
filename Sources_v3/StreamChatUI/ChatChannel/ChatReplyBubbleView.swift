@@ -17,7 +17,7 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
         }
     }
     
-    lazy var textViewHeightConstraint = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: .zero).priority()
+    lazy var textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: 12).priority()
     
     // MARK: - Subviews
     
@@ -80,21 +80,22 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
         authorAvatarView.widthAnchor.constraint(equalToConstant: avatarViewWidth).priority().isActive = true
         authorAvatarView.heightAnchor.constraint(equalToConstant: avatarViewWidth).priority().isActive = true
         
-     //   container.centerContainerStackView.spacing = UIStackView.spacingUseSystem
+        container.centerContainerStackView.spacing = UIStackView.spacingUseSystem
         container.centerContainerStackView.alignment = .bottom
         
         container.centerStackView.isLayoutMarginsRelativeArrangement = true
         container.centerStackView.layoutMargins = layoutMargins
         
         container.centerStackView.isHidden = false
-       // container.centerStackView.spacing = UIStackView.spacingUseSystem
+        container.centerStackView.spacing = UIStackView.spacingUseSystem
         container.centerStackView.alignment = .top
-     //   container.centerStackView.addArrangedSubview(attachmentPreview)
+        container.centerStackView.addArrangedSubview(attachmentPreview)
 
         attachmentPreview.widthAnchor.constraint(equalToConstant: attachmentPreviewWidth).priority().isActive = true
         attachmentPreview.heightAnchor.constraint(equalToConstant: attachmentPreviewWidth).priority().isActive = true
 
         container.centerStackView.addArrangedSubview(textView)
+        textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textViewHeightConstraint.isActive = true
         
         container.centerStackView.layer.maskedCorners = [

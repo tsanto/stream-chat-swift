@@ -169,7 +169,7 @@ open class ChatChannelMessageComposerView<ExtraData: ExtraDataTypes>: UIInputVie
         container.centerStackView.alignment = .fill
         
         replyView.isHidden = true
-       // container.centerStackView.addArrangedSubview(replyView)
+        container.centerStackView.addArrangedSubview(replyView)
         container.centerStackView.addArrangedSubview(attachmentsView)
         attachmentsView.heightAnchor.constraint(equalToConstant: attachmentsViewHeight).priority().isActive = true
         
