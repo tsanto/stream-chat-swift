@@ -53,7 +53,7 @@ open class ChatMessageActionsViewController<ExtraData: ExtraDataTypes>: ViewCont
     public var messageActions: [ChatMessageActionItem] = [] {
         didSet { updateContentIfNeeded() }
     }
-
+    
     // MARK: - Subviews
 
     private lazy var messageActionView = uiConfig

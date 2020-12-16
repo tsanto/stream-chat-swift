@@ -25,7 +25,7 @@ open class ChatChannelMessageInputView<ExtraData: ExtraDataTypes>: UIView {
         if #available(iOS 13.0, *) {
             button.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         }
-        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).isActive = true
+        button.widthAnchor.constraint(equalTo: button.heightAnchor, multiplier: 1).priority().isActive = true
         return button
     }()
     
@@ -57,9 +57,9 @@ open class ChatChannelMessageInputView<ExtraData: ExtraDataTypes>: UIView {
     
     // MARK: - Overrides
     
-    override open var intrinsicContentSize: CGSize {
-        CGSize(width: UIView.noIntrinsicMetric, height: textView.calculatedTextHeight())
-    }
+//    override open var intrinsicContentSize: CGSize {
+//        CGSize(width: UIView.noIntrinsicMetric, height: textView.calculatedTextHeight())
+//    }
     
     // MARK: - Public
     
@@ -80,7 +80,7 @@ open class ChatChannelMessageInputView<ExtraData: ExtraDataTypes>: UIView {
         
         container.rightStackView.alignment = .center
         container.rightStackView.addArrangedSubview(rightAccessoryButton)
-        rightAccessoryButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        rightAccessoryButton.widthAnchor.constraint(equalToConstant: 20).priority().isActive = true
     }
 
     public func setSlashCommandViews(hidden: Bool) {

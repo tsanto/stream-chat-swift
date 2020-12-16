@@ -68,14 +68,30 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
     
     // MARK: Setup
     
+    override open func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("loopdb: MessageComposerInputAccessoryViewController viewWillLayout")
+    }
+    
+    override open func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("loopdb: MessageComposerInputAccessoryViewController viewWillDisappear")
+    }
+    
+    var viewDidLoadCalledOnce = false
+    
     override open func viewDidLoad() {
         super.viewDidLoad()
+        //guard !viewDidLoadCalledOnce else { return }
+        
+        //viewDidLoadCalledOnce = true
         
         setUp()
         (self as! Self).applyDefaultAppearance()
         setUpAppearance()
         setUpLayout()
         updateContent()
+        print("loopdb: MessageComposerInputAccessoryViewController viewDidLoad")
     }
     
     open func setUp() {
@@ -123,10 +139,15 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
             // update ui with message to edit
         }
     }
+    
+    override open func viewWillAppear(_ animated: Bool) {
+        inputView = composerView
+    }
 
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dismissSuggestionsViewController()
+        inputView = nil
     }
     
     func setupInputView() {
@@ -150,7 +171,7 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
     open func setUpLayout() {}
     
     public func observeSizeChanges() {
-        composerView.addObserver(self, forKeyPath: "safeAreaInsets", options: .new, context: nil)
+        composerView.addObserver(self, forKeyPath: "safeAreaInsets", options: [.initial, .new], context: nil)
         textView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
     }
     
@@ -162,9 +183,18 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
         change: [NSKeyValueChangeKey: Any]?,
         context: UnsafeMutableRawPointer?
     ) {
-        if object as AnyObject? === textView, keyPath == "contentSize" {
+        if let newContentSize = change?[.init(rawValue: "new")] as? CGSize,
+            object as AnyObject? === textView,
+            keyPath == "contentSize" {
+            // not working
+            guard newContentSize != textView.contentSize else { return }
+            print("loopdb: observe contentSize \(change?[.init(rawValue: "new")] as? CGSize)")
             composerView.invalidateIntrinsicContentSize()
-        } else if object as AnyObject? === composerView, keyPath == "safeAreaInsets" {
+            //print("loopdb: observe textView.contentSize")
+        } else if object as AnyObject? === inputView,
+                  keyPath == "safeAreaInsets",
+                  let newInsets = change?[.init(rawValue: "new")] as? UIEdgeInsets {
+            guard newInsets != composerView.safeAreaInsets else { return }
             composerView.invalidateIntrinsicContentSize()
         }
     }
@@ -290,6 +320,7 @@ open class MessageComposerInputAccessoryViewController<ExtraData: ExtraDataTypes
         isEmpty = textView.text.replacingOccurrences(of: " ", with: "").isEmpty
         replaceTextWithSlashCommandViewIfNeeded()
         promptSuggestionIfNeeded()
+        composerView.invalidateIntrinsicContentSize()
     }
 
     // MARK: - UIImagePickerControllerDelegate

@@ -17,7 +17,7 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
         }
     }
     
-    lazy var textViewHeightConstraint = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: .zero)
+    lazy var textViewHeightConstraint = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: .zero).priority()
     
     // MARK: - Subviews
     
@@ -77,22 +77,22 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
         
         container.leftStackView.isHidden = false
         container.leftStackView.addArrangedSubview(authorAvatarView)
-        authorAvatarView.widthAnchor.constraint(equalToConstant: avatarViewWidth).isActive = true
-        authorAvatarView.heightAnchor.constraint(equalTo: authorAvatarView.widthAnchor, multiplier: 1).isActive = true
+        authorAvatarView.widthAnchor.constraint(equalToConstant: avatarViewWidth).priority().isActive = true
+        authorAvatarView.heightAnchor.constraint(equalToConstant: avatarViewWidth).priority().isActive = true
         
-        container.centerContainerStackView.spacing = UIStackView.spacingUseSystem
+     //   container.centerContainerStackView.spacing = UIStackView.spacingUseSystem
         container.centerContainerStackView.alignment = .bottom
         
         container.centerStackView.isLayoutMarginsRelativeArrangement = true
         container.centerStackView.layoutMargins = layoutMargins
         
         container.centerStackView.isHidden = false
-        container.centerStackView.spacing = UIStackView.spacingUseSystem
+       // container.centerStackView.spacing = UIStackView.spacingUseSystem
         container.centerStackView.alignment = .top
-        container.centerStackView.addArrangedSubview(attachmentPreview)
+     //   container.centerStackView.addArrangedSubview(attachmentPreview)
 
-        attachmentPreview.widthAnchor.constraint(equalToConstant: attachmentPreviewWidth).isActive = true
-        attachmentPreview.heightAnchor.constraint(equalTo: attachmentPreview.widthAnchor, multiplier: 1).isActive = true
+        attachmentPreview.widthAnchor.constraint(equalToConstant: attachmentPreviewWidth).priority().isActive = true
+        attachmentPreview.heightAnchor.constraint(equalToConstant: attachmentPreviewWidth).priority().isActive = true
 
         container.centerStackView.addArrangedSubview(textView)
         textViewHeightConstraint.isActive = true
@@ -117,6 +117,8 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
         textView.text = message.text
         
         updateAttachmentPreview(for: message)
+        
+      //  setNeedsLayout()
         
         textViewHeightConstraint.constant = textView.calculatedTextHeight()
     }
@@ -155,4 +157,46 @@ open class ChatReplyBubbleView<ExtraData: ExtraDataTypes>: View, UIConfigProvide
             }
         }
     }
+}
+
+extension NSLayoutConstraint {
+    func priority(_ priority: Float = 998) -> NSLayoutConstraint {
+        let constraint = self
+        constraint.priority = .init(priority)
+        return constraint
+    }
+}
+
+extension UIStackView {
+    var embeded: UIView {
+        let view = UIView()
+        view.addSubview(self)
+        
+        let bottomConstraint = bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+        bottomConstraint.priority = .init(998)
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            bottomConstraint
+        ])
+        
+        return view
+    }
+}
+
+func testEmbeded(sv: UIStackView) -> UIView {
+    let view = UIView()
+    view.addSubview(sv)
+    
+    let bottomConstraint = sv.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+    bottomConstraint.priority = .init(998)
+    NSLayoutConstraint.activate([
+        sv.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+        sv.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+        sv.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+        bottomConstraint
+    ])
+    
+    return view
 }

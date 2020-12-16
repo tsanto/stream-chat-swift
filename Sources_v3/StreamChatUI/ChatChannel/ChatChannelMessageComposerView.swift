@@ -57,7 +57,7 @@ open class ChatChannelMessageComposerView<ExtraData: ExtraDataTypes>: UIInputVie
     public private(set) lazy var stateIcon: UIImageView = {
         let imageView = UIImageView().withoutAutoresizingMaskConstraints
         imageView.contentMode = .center
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1).isActive = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 1).priority().isActive = true
         return imageView
     }()
     
@@ -80,10 +80,13 @@ open class ChatChannelMessageComposerView<ExtraData: ExtraDataTypes>: UIInputVie
     
     // MARK: - Overrides
     
+    var didMoveToSuperviewOnce: Bool = false
+    
     override open func didMoveToSuperview() {
         super.didMoveToSuperview()
-        guard superview != nil else { return }
+        guard superview != nil, !didMoveToSuperviewOnce else { return }
         
+        didMoveToSuperviewOnce = true
         setUp()
         (self as! Self).applyDefaultAppearance()
         setUpAppearance()
@@ -139,6 +142,11 @@ open class ChatChannelMessageComposerView<ExtraData: ExtraDataTypes>: UIInputVie
     
     open func setUpAppearance() {}
     
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        print("loopdb: ChatChannelMessageComposerView layoutSubviews")
+    }
+    
     open func setUpLayout() {
         embed(container)
         
@@ -154,16 +162,16 @@ open class ChatChannelMessageComposerView<ExtraData: ExtraDataTypes>: UIInputVie
         container.topStackView.addArrangedSubview(titleLabel)
         container.topStackView.addArrangedSubview(dismissButton)
         
-        stateIcon.heightAnchor.constraint(equalToConstant: stateIconHeight).isActive = true
+        stateIcon.heightAnchor.constraint(equalToConstant: stateIconHeight).priority().isActive = true
         
         container.centerStackView.isHidden = false
         container.centerStackView.axis = .vertical
         container.centerStackView.alignment = .fill
         
         replyView.isHidden = true
-        container.centerStackView.addArrangedSubview(replyView)
+       // container.centerStackView.addArrangedSubview(replyView)
         container.centerStackView.addArrangedSubview(attachmentsView)
-        attachmentsView.heightAnchor.constraint(equalToConstant: attachmentsViewHeight).isActive = true
+        attachmentsView.heightAnchor.constraint(equalToConstant: attachmentsViewHeight).priority().isActive = true
         
         container.centerStackView.addArrangedSubview(messageInputView)
         messageInputView.setContentHuggingPriority(.defaultLow, for: .horizontal)

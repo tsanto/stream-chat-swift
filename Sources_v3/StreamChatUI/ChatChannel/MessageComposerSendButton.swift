@@ -35,8 +35,8 @@ open class MessageComposerSendButton<ExtraData: ExtraDataTypes>: ChatSquareButto
     override open func setUpLayout() {
         guard let size = defaultIntrinsicContentSize else { return }
         
-        heightAnchor.constraint(equalToConstant: size.height).isActive = true
-        widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        heightAnchor.constraint(equalToConstant: size.height).priority().isActive = true
+        widthAnchor.constraint(equalToConstant: size.width).priority().isActive = true
     }
     
     override open func updateContent() {

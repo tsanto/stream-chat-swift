@@ -10,6 +10,10 @@ open class ChatChannelMessageInputTextView<ExtraData: ExtraDataTypes>: UITextVie
     Customizable,
     UIConfigProvider
 {
+    // MARK: - Properties
+    
+    lazy var heightConstraint = heightAnchor.constraint(greaterThanOrEqualToConstant: .zero).priority()
+    
     // MARK: - Subviews
     
     public lazy var placeholderLabel: UILabel = UILabel().withoutAutoresizingMaskConstraints
@@ -69,6 +73,7 @@ open class ChatChannelMessageInputTextView<ExtraData: ExtraDataTypes>: UITextVie
             trailing: .zero
         ))
         placeholderLabel.pin(anchors: [.centerY], to: self)
+        heightConstraint.isActive = true
     }
     
     open func updateContent() {}
@@ -76,5 +81,6 @@ open class ChatChannelMessageInputTextView<ExtraData: ExtraDataTypes>: UITextVie
     @objc func textDidChange() {
         delegate?.textViewDidChange?(self)
         placeholderLabel.isHidden = !text.isEmpty
+        heightConstraint.constant = calculatedTextHeight()
     }
 }
