@@ -265,8 +265,8 @@
 		79CD959424F9381700E87377 /* MulticastDelegate_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD959324F9381700E87377 /* MulticastDelegate_Tests.swift */; };
 		79CD959624F9414700E87377 /* ChannelListController+SwiftUI_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD959524F9414700E87377 /* ChannelListController+SwiftUI_Tests.swift */; };
 		79CDE1DD24B321FE0003BD1D /* CurrentUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDE1DC24B321FE0003BD1D /* CurrentUserDTO.swift */; };
-		79D7A1CE2593A40900D3C2BF /* ChannelPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D7A1CD2593A40900D3C2BF /* ChannelPayload.swift */; };
 		79D7A15525923B8300D3C2BF /* StreamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C941B247D2F80001F1104 /* StreamChat.framework */; };
+		79D7A1CE2593A40900D3C2BF /* ChannelPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D7A1CD2593A40900D3C2BF /* ChannelPayload.swift */; };
 		79D86E832562BAB900DCD1D2 /* AppearanceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D86E822562BAB900DCD1D2 /* AppearanceSetting.swift */; };
 		79DDF80E249CB920002F4412 /* RequestDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DDF80D249CB920002F4412 /* RequestDecoder.swift */; };
 		79DDF810249CB92E002F4412 /* RequestDecoder_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DDF80F249CB92E002F4412 /* RequestDecoder_Tests.swift */; };
@@ -1499,7 +1499,7 @@
 				792A4F412480103A00EAF71D /* Query */,
 				79280F3D2484E33C00CDEB89 /* Errors */,
 				792A4F3A247FFB7600EAF71D /* Utils */,
-				79B7A953259214830092E802 /* NotificationServiceExtension.swift */,
+				796D3297259DBDC900FE3454 /* Notifications */,
 				799C941D247D2F80001F1104 /* Sources_v3.h */,
 				799C941E247D2F80001F1104 /* Info.plist */,
 			);
@@ -1964,6 +1964,14 @@
 				88381E6D258259310047A6A3 /* FileUploadPayload_Tests.swift */,
 			);
 			path = Payloads;
+			sourceTree = "<group>";
+		};
+		796D3297259DBDC900FE3454 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				79B7A953259214830092E802 /* NotificationServiceExtension.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		798779F52498E47700015F8B /* MockEnpointResponses */ = {
@@ -3043,7 +3051,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Stream.io Inc";
 				TargetAttributes = {
 					790881FC25432B7200896F03 = {

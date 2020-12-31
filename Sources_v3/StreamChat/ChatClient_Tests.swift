@@ -213,23 +213,23 @@ class ChatClient_Tests: StressTestCase {
         
         // Simulate WebSocketConnection change
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .connecting)
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .connecting)
         
         AssertAsync.staysTrue(providedConnectionId == nil)
         
         // Simulate WebSocket connected and connection id is provided
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .connecting)
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .connecting)
         let connectionId: ConnectionId = .unique
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .connected(connectionId: connectionId))
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .connected(connectionId: connectionId))
         
         AssertAsync.willBeEqual(providedConnectionId, connectionId)
         XCTAssertEqual(try await { client.provideConnectionId(completion: $0) }, connectionId)
         
         // Simulate WebSocketConnection disconnecting and assert connectionId is reset
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .connecting)
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .connecting)
         
         providedConnectionId = nil
         client.provideConnectionId {
@@ -256,14 +256,14 @@ class ChatClient_Tests: StressTestCase {
         // Simulate WebSocketConnection change to "disconnected"
         let error = ClientError(with: TestError())
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .disconnected(error: error))
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .disconnected(error: error))
         
         // Assert the provided connection id is `nil`
         XCTAssertNil(providedConnectionId)
         
         // Simulate WebSocketConnection change to "connected" and assert `providedConnectionId` is still `nil`
         testEnv.webSocketClient?.connectionStateDelegate?
-            .webSocketClient(testEnv.webSocketClient!, didUpdateConectionState: .connected(connectionId: .unique))
+            .webSocketClient(testEnv.webSocketClient!, didUpdateConnectionState: .connected(connectionId: .unique))
 
         XCTAssertNil(providedConnectionId)
     }

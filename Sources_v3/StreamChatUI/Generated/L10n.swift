@@ -31,6 +31,17 @@ internal enum L10n {
             internal static let directMessageReply = L10n.tr("Localizable", "composer.checkmark.direct-message-reply")
         }
 
+        internal enum Picker {
+            /// Cancel
+            internal static let cancel = L10n.tr("Localizable", "composer.picker.cancel")
+            /// File
+            internal static let file = L10n.tr("Localizable", "composer.picker.file")
+            /// Photo
+            internal static let image = L10n.tr("Localizable", "composer.picker.image")
+            /// Choose attachment type:
+            internal static let title = L10n.tr("Localizable", "composer.picker.title")
+        }
+
         internal enum Placeholder {
             /// Search GIFs
             internal static let giphy = L10n.tr("Localizable", "composer.placeholder.giphy")
