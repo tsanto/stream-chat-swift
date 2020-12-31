@@ -17,6 +17,9 @@ class LoginViewController: UITableViewController {
     
     func logIn() -> ChatClient {
         var config = ChatClientConfig(apiKey: APIKey(Configuration.apiKey))
+        config.localStorageFolderURL = FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: "group.io.getstream.iOS.Sample.Group")!
+        
         config.isLocalStorageEnabled = Configuration.isLocalStorageEnabled
         config.shouldFlushLocalStorageOnStart = Configuration.shouldFlushLocalStorageOnStart
         config.baseURL = Configuration.baseURL
@@ -25,12 +28,29 @@ class LoginViewController: UITableViewController {
             userId: Configuration.userId,
             name: Configuration.userName
         )
-        
+
         let chatClient = ChatClient(
             config: config,
             tokenProvider: tokenProvider,
             completion: {
+                if error == nil {
+                    DispatchQueue.main.async {
+                        // Add device token
+                        if let token = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken {
+                            currentUserController.addDevice(token: token) {
+                                _ = currentUserController
+                                if let error = $0 {
+                                    print("Failed to register APNS device token: \(error)")
+                                } else {
+                                    print("APNS token successfully added.")
+                                }
+                            }
+                        }
+                    }
+                }
+
                 guard let error = $0 else { return }
+
                 DispatchQueue.main.async {
                     let viewController = UIApplication.shared.keyWindow?.rootViewController
                     viewController?.alert(title: "Error", message: "Error logging in: \(error)") {

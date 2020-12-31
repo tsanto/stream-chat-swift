@@ -6,6 +6,8 @@
 import StreamChatUI
 import UIKit
 
+import UserNotifications
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
@@ -29,6 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUpAppearance()
 
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { (isGranted, error) in
+            print("Granted? \(isGranted), \(String(describing: error))")
+
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
+        
         return true
     }
 
@@ -56,5 +66,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setUpAppearance() {
         UIConfig<DefaultExtraData>.default.navigation.channelListRouter = MyChatChannelListRouter.self
         ChatChannelListCollectionView.appearance().backgroundColor = .white
+    }
+    
+    var deviceToken: Data?
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        self.deviceToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print(error)
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        print("Notification:", userInfo)
+        print()
     }
 }
