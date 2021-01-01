@@ -191,9 +191,9 @@ public extension _CurrentChatUserController {
             } else {
                 // Try to get a concrete error
                 if case let .disconnected(error) = self?.client.webSocketClient.connectionState {
-                    completion?(ClientError.ConnectionNotSuccessfull(with: error))
+                    completion?(ClientError.ConnectionNotSuccessful(with: error))
                 } else {
-                    completion?(ClientError.ConnectionNotSuccessfull())
+                    completion?(ClientError.ConnectionNotSuccessful())
                 }
             }
         }
@@ -213,6 +213,61 @@ public extension _CurrentChatUserController {
         
         // Remove all waiters for connectionId
         client.connectionIdWaiters.removeAll()
+    }
+    
+    /// Tries to restore the latests logged-in user and set it as the current one.
+    ///
+    /// If the current user is already set and connected, calling this function has no effect. If `connectAutomatically` is set
+    /// and the client is not connected, it tries to connect.
+    ///
+    /// - Important: ⚠️ The `isLocalStorageEnabled` flag in `ChatClientConfig` must be set to `true` (default value) in order to
+    /// make this feature work. If the local storage is disabled restoring the last user session always fails.
+    ///
+    /// - Parameters:
+    ///   - token: You can provide a token which is used for user authentication. If the `token` is not explicitly provided,
+    ///   the client uses `ChatClientConfig.tokenProvider` to obtain a token. If you haven't specified the token provider,
+    ///   providing a token explicitly is required. In case both the `token` and `ChatClientConfig.tokenProvider` is specified,
+    ///   the `token` value is used.
+    ///
+    ///   - connectAutomatically: If sets to `true`, automatically connects the client to the servers to start receiving updates.
+    ///   The client connects only when the user restoration was successful.
+    ///
+    ///   - completion: Called when the operation finishes. Called with an error object if the operation failed, called with
+    ///    `nil` if the operation finished successfully.
+    ///
+    func restoreLastUser(token: Token? = nil, connectAutomatically: Bool = true, completion: ((Error?) -> Void)? = nil) {
+        // Check if the current user of client is similar to the last known user in the db.
+        guard client.currentUserId != currentUser?.id else {
+            log.warning("The current user is already set. Skipping the restoration.")
+            if connectAutomatically {
+                connect(completion: completion)
+            } else {
+                completion?(nil)
+            }
+            return
+        }
+
+        guard let lastUserId = currentUser?.id else {
+            if !client.config.isLocalStorageEnabled {
+                log.warning(
+                    "The `isLocalStorageEnabled` flag in `ChatClientConfig` must be set to `true` (default value) " +
+                        "in order to make restoring the last user session work. If the local storage is disabled restoring " +
+                        "the last user session always fails."
+                )
+            }
+
+            completion?(ClientError.NoPreviousUserSession())
+            return
+        }
+        
+        client.currentUserId = lastUserId
+        client.currentToken = token
+        
+        if connectAutomatically {
+            connect(completion: completion)
+        } else {
+            completion?(nil)
+        }
     }
     
     /// Sets a new anonymous user as the current user.
@@ -672,6 +727,15 @@ private class ConnectionEventObserver: EventObserver {
         super.init(notificationCenter: notificationCenter, transform: { $0 as? ConnectionStatusUpdated }) {
             guard filter == nil || filter?($0) == true else { return }
             callback($0)
+        }
+    }
+}
+
+extension ClientError {
+    class NoPreviousUserSession: ClientError {
+        override var localizedDescription: String {
+            "There's no existing user session in the local storage. Make sure `localStorageFolderURL` is set correctly. " +
+                "The user session is saved when the chat client successfully connects to the servers at least once."
         }
     }
 }

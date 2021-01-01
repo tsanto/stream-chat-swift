@@ -224,6 +224,147 @@ final class CurrentUserController_Tests: StressTestCase {
 
     // MARK: - Setting new user
     
+    func test_restoreLastUser_returnsError_whenNoPreviousUserIsSaved() throws {
+        let storage = URL.newTemporaryDirectoryURL()
+        var config = ChatClientConfig(apiKey: APIKey(.unique))
+        config.localStorageFolderURL = storage
+        
+        let client = ChatClient(config: config, workerBuilders: [], environment: .mock)
+        let error = try await { client.currentUserController().restoreLastUser(completion: $0) }
+        
+        XCTAssert(error is ClientError.NoPreviousUserSession)
+    }
+    
+    func test_restoreLastUser_succeedsWhenUserAlreadySet() throws {
+        // Simulate successful connection
+        let userId: UserId = .unique
+        
+        client.currentUserController().setUser(userId: userId, name: nil, imageURL: nil, token: .unique)
+        
+        client.webSocketClient.webSocketDidReceiveMessage(healthCheckEventJSON(userId: userId))
+        client.webSocketClient.simulateConnectionStatus(.connected(connectionId: .unique))
+        
+        AssertAsync.willBeEqual(client.currentUserController().currentUser?.id, userId)
+        
+        // Test calling `restoreLastUser` succeeds
+        let error = try await { client.currentUserController().restoreLastUser(completion: $0) }
+        XCTAssertNil(error)
+    }
+
+    func test_restoreLastUsers_respectsConnectAutomaticallyOption_whenUserIsAlreadySet() throws {
+        // Simulate successful connection
+        let userId: UserId = .unique
+
+        client.currentUserController().setUser(userId: userId, name: nil, imageURL: nil, token: .unique)
+
+        client.webSocketClient.webSocketDidReceiveMessage(healthCheckEventJSON(userId: userId))
+        client.webSocketClient.simulateConnectionStatus(.connected(connectionId: .unique))
+
+        AssertAsync.willBeEqual(client.currentUserController().currentUser?.id, userId)
+
+        // Disconnect and reset mock counters
+        controller.disconnect()
+        client.mockWebSocketClient.disconnect_calledCounter = 0
+        client.mockWebSocketClient.connect_calledCounter = 0
+
+        // Call restoreLastUser with connectAutomatically = false
+        let error = try await {
+            controller.restoreLastUser(token: .unique, connectAutomatically: false, completion: $0)
+        }
+
+        // Assert the completion was called without error
+        XCTAssertNil(error)
+
+        // Assert no connection/disconnection attempts were made
+        XCTAssertEqual(client.mockWebSocketClient.disconnect_calledCounter, 0)
+        XCTAssertEqual(client.mockWebSocketClient.connect_calledCounter, 0)
+
+        // Call restoreLastUser with connectAutomatically = true
+        var completionCalled = false
+        controller.restoreLastUser(token: .unique, connectAutomatically: true, completion: { _ in completionCalled = true })
+
+        // Assert the connection attempt is made
+        XCTAssertEqual(client.mockWebSocketClient.connect_calledCounter, 1)
+
+        // Simulate connection success
+        client.webSocketClient.webSocketDidReceiveMessage(healthCheckEventJSON(userId: userId))
+        client.webSocketClient.simulateConnectionStatus(.connected(connectionId: .unique))
+
+        // Assert the completion is called
+        AssertAsync.willBeTrue(completionCalled)
+    }
+
+    func test_restoreLastUser_restoresUser() throws {
+        // How to test this:
+        // 1. Create a config and set a valid local storage url
+        // 2. Create a new client instance and simulate successful connection
+        // 3. Create another instance of client with the same config (-> same DB) and try to restore the user session.
+        
+        let userId: UserId = .unique
+        
+        // 1. Create a config and set a valid local storage url
+        let storage = URL.newTemporaryDirectoryURL()
+        var config = ChatClientConfig(apiKey: APIKey(.unique))
+        config.localStorageFolderURL = storage
+        
+        // 2. Create a new client instance and simulate successful connection
+        let oldClient = ChatClient(config: config, workerBuilders: [], environment: .mock)
+        
+        var oldClientCompletionCalled = false
+        oldClient.currentUserController()
+            .setUser(userId: userId, name: nil, imageURL: nil, token: .unique, completion: { error in
+                XCTAssertNil(error)
+                oldClientCompletionCalled = true
+            })
+        
+        oldClient.webSocketClient.webSocketDidReceiveMessage(healthCheckEventJSON(userId: userId))
+        oldClient.webSocketClient.simulateConnectionStatus(.connected(connectionId: .unique))
+        
+        AssertAsync {
+            Assert.willBeTrue(oldClientCompletionCalled)
+            Assert.willBeEqual(oldClient.currentUserController().currentUser?.id, userId)
+        }
+
+        let shouldConnectOptions = [true, false]
+
+        shouldConnectOptions.forEach { shouldConnect in
+            // 3. Create another instance of client with the same config (-> same DB) and try to restore the user session.
+            let newClient = ChatClient(config: config, workerBuilders: [], environment: .mock)
+            let newToken: Token = .unique
+
+            var completionCalled = false
+
+            newClient.currentUserController().restoreLastUser(
+                token: newToken,
+                connectAutomatically: shouldConnect,
+                completion: { _ in completionCalled = true }
+            )
+
+            // Assert the correct values are set
+            AssertAsync {
+                Assert.willBeEqual(newClient.currentUserId, userId)
+                Assert.willBeEqual(newClient.currentToken, newToken)
+            }
+
+            if shouldConnect {
+                // Assert the connection was initiated
+                XCTAssertEqual(newClient.mockWebSocketClient.connect_calledCounter, 1)
+
+                // Simulate connection success
+                newClient.webSocketClient.webSocketDidReceiveMessage(healthCheckEventJSON(userId: userId))
+                newClient.webSocketClient.simulateConnectionStatus(.connected(connectionId: .unique))
+
+                // Assert the completion is called
+                AssertAsync.willBeTrue(completionCalled)
+
+            } else {
+                // Assert the connection was NOT initiated and the completion was called
+                XCTAssertEqual(newClient.mockWebSocketClient.connect_calledCounter, 0)
+                XCTAssertTrue(completionCalled)
+            }
+        }
+    }
+    
     func test_setUser_updatesClientToken() {
         let newToken: Token = .unique
         controller.setUser(userId: .unique, name: nil, imageURL: nil, token: newToken)
