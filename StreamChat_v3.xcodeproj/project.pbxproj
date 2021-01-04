@@ -476,6 +476,10 @@
 		8AE335A924FCF999002B6677 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE335A624FCF999002B6677 /* InternetConnection.swift */; };
 		8AE335AA24FCF99E002B6677 /* InternetConnection_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE335A424FCF999002B6677 /* InternetConnection_Tests.swift */; };
 		8AE8950D24D8660800E852EC /* PingPongEmojiFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8950B24D85FF200E852EC /* PingPongEmojiFormatter.swift */; };
+		ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */; };
+		ADCAD65425A388B4000D1A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* ContentView.swift */; };
+		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
+		ADCAD65925A388B5000D1A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */; };
 		DA0BB1612513B5F200CAEFBD /* StringInterpolation+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0BB1602513B5F200CAEFBD /* StringInterpolation+Extenstions.swift */; };
 		DA15A20424DF257500BE2423 /* ChannelQuery_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15A20224DF256F00BE2423 /* ChannelQuery_Tests.swift */; };
 		DA49712625476A3600AC68C2 /* AttachmentRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4971202547699E00AC68C2 /* AttachmentRequestBody.swift */; };
@@ -1186,6 +1190,12 @@
 		8AE335A524FCF999002B6677 /* Reachability_Vendor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability_Vendor.swift; sourceTree = "<group>"; };
 		8AE335A624FCF999002B6677 /* InternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 		8AE8950B24D85FF200E852EC /* PingPongEmojiFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingPongEmojiFormatter.swift; sourceTree = "<group>"; };
+		ADCAD64F25A388B4000D1A71 /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCloneApp.swift; sourceTree = "<group>"; };
+		ADCAD65325A388B4000D1A71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ADCAD65525A388B5000D1A71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ADCAD65A25A388B5000D1A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA0BB1602513B5F200CAEFBD /* StringInterpolation+Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringInterpolation+Extenstions.swift"; sourceTree = "<group>"; };
 		DA15A20224DF256F00BE2423 /* ChannelQuery_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelQuery_Tests.swift; sourceTree = "<group>"; };
 		DA4971202547699E00AC68C2 /* AttachmentRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentRequestBody.swift; sourceTree = "<group>"; };
@@ -1380,6 +1390,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				799C9456247D59B1001F1104 /* StreamChat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADCAD64C25A388B4000D1A71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2458,6 +2475,7 @@
 				799C9452247D59B1001F1104 /* Tests_v3 */,
 				792A4F23247FF01800EAF71D /* Sample_v3 */,
 				792DDA58256FB69E001DB91B /* DemoApp */,
+				ADCAD65025A388B4000D1A71 /* iMessageClone */,
 				8AD5EC9022E9A3E8005CFAC9 /* Products */,
 				8AD5ECA722E9B3C4005CFAC9 /* Frameworks */,
 			);
@@ -2476,6 +2494,7 @@
 				792DDA57256FB69E001DB91B /* ChatSample.app */,
 				793060E625778896005CF846 /* StreamChatTestTools.framework */,
 				793060EE25778897005CF846 /* StreamChatTestToolsTests.xctest */,
+				ADCAD64F25A388B4000D1A71 /* iMessageClone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2512,6 +2531,26 @@
 				79200D4B25025B81002F4EB1 /* Error+InternetNotAvailable.swift */,
 			);
 			path = "Internet Connection";
+			sourceTree = "<group>";
+		};
+		ADCAD65025A388B4000D1A71 /* iMessageClone */ = {
+			isa = PBXGroup;
+			children = (
+				ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */,
+				ADCAD65325A388B4000D1A71 /* ContentView.swift */,
+				ADCAD65525A388B5000D1A71 /* Assets.xcassets */,
+				ADCAD65A25A388B5000D1A71 /* Info.plist */,
+				ADCAD65725A388B5000D1A71 /* Preview Content */,
+			);
+			path = iMessageClone;
+			sourceTree = "<group>";
+		};
+		ADCAD65725A388B5000D1A71 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		DA4971652549C46400AC68C2 /* Attachment */ = {
@@ -2854,13 +2893,30 @@
 			productReference = 799C9451247D59B1001F1104 /* StreamChatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		ADCAD64E25A388B4000D1A71 /* iMessageClone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADCAD65E25A388B5000D1A71 /* Build configuration list for PBXNativeTarget "iMessageClone" */;
+			buildPhases = (
+				ADCAD64B25A388B4000D1A71 /* Sources */,
+				ADCAD64C25A388B4000D1A71 /* Frameworks */,
+				ADCAD64D25A388B4000D1A71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iMessageClone;
+			productName = iMessageClone;
+			productReference = ADCAD64F25A388B4000D1A71 /* iMessageClone.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8AD5EC8622E9A3E8005CFAC9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Stream.io Inc";
 				TargetAttributes = {
@@ -2891,6 +2947,9 @@
 					799C9450247D59B1001F1104 = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
+					ADCAD64E25A388B4000D1A71 = {
+						CreatedOnToolsVersion = 12.3;
+					};
 				};
 			};
 			buildConfigurationList = 8AD5EC8922E9A3E8005CFAC9 /* Build configuration list for PBXProject "StreamChat_v3" */;
@@ -2918,6 +2977,7 @@
 				790881FC25432B7200896F03 /* StreamChatUI */,
 				7908820425432B7200896F03 /* StreamChatUITests */,
 				792DDA56256FB69E001DB91B /* DemoApp */,
+				ADCAD64E25A388B4000D1A71 /* iMessageClone */,
 			);
 		};
 /* End PBXProject section */
@@ -3049,6 +3109,15 @@
 				DA653BBA253F47EB00B448A0 /* Messages.json in Resources */,
 				F62BE7902506620000D13B86 /* MissingEventsPayload.json in Resources */,
 				8A0CC9F624C608C500705CF9 /* ReactionNew.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADCAD64D25A388B4000D1A71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADCAD65925A388B5000D1A71 /* Preview Assets.xcassets in Resources */,
+				ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3710,6 +3779,15 @@
 				8819DFDE252622D900FD1A50 /* ModerationEndpoints_Tests.swift in Sources */,
 				F65D9093250A5CD4000B8CEB /* WebSocketConnectEndpoint_Tests.swift in Sources */,
 				790A4C4A252DDD50001F4A23 /* DeviceEndpoints_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADCAD64B25A388B4000D1A71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADCAD65425A388B4000D1A71 /* ContentView.swift in Sources */,
+				ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4619,6 +4697,73 @@
 			};
 			name = ReleaseTests;
 		};
+		ADCAD65B25A388B5000D1A71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iMessageClone/Preview Content\"";
+				DEVELOPMENT_TEAM = YTPG3599NE;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iMessageClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunovieira.iMessageClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADCAD65C25A388B5000D1A71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iMessageClone/Preview Content\"";
+				DEVELOPMENT_TEAM = YTPG3599NE;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iMessageClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunovieira.iMessageClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ADCAD65D25A388B5000D1A71 /* ReleaseTests */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"iMessageClone/Preview Content\"";
+				DEVELOPMENT_TEAM = YTPG3599NE;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iMessageClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunovieira.iMessageClone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = ReleaseTests;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4708,6 +4853,16 @@
 				8AD5EC9522E9A3E8005CFAC9 /* Debug */,
 				8AD5EC9622E9A3E8005CFAC9 /* Release */,
 				A57E5C6D24C6FA3900187DC2 /* ReleaseTests */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADCAD65E25A388B5000D1A71 /* Build configuration list for PBXNativeTarget "iMessageClone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADCAD65B25A388B5000D1A71 /* Debug */,
+				ADCAD65C25A388B5000D1A71 /* Release */,
+				ADCAD65D25A388B5000D1A71 /* ReleaseTests */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
