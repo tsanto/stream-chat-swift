@@ -480,6 +480,8 @@
 		ADCAD65425A388B4000D1A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* ContentView.swift */; };
 		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
 		ADCAD65925A388B5000D1A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */; };
+		ADCAD66625A389E6000D1A71 /* StreamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C941B247D2F80001F1104 /* StreamChat.framework */; };
+		ADCAD66725A389E6000D1A71 /* StreamChat.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 799C941B247D2F80001F1104 /* StreamChat.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA0BB1612513B5F200CAEFBD /* StringInterpolation+Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0BB1602513B5F200CAEFBD /* StringInterpolation+Extenstions.swift */; };
 		DA15A20424DF257500BE2423 /* ChannelQuery_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA15A20224DF256F00BE2423 /* ChannelQuery_Tests.swift */; };
 		DA49712625476A3600AC68C2 /* AttachmentRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4971202547699E00AC68C2 /* AttachmentRequestBody.swift */; };
@@ -674,6 +676,13 @@
 			remoteGlobalIDString = 799C941A247D2F80001F1104;
 			remoteInfo = Sources_v3;
 		};
+		ADCAD66825A389E6000D1A71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8AD5EC8622E9A3E8005CFAC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 799C941A247D2F80001F1104;
+			remoteInfo = StreamChat;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -697,6 +706,17 @@
 			files = (
 				79940B8D258398A500791EAE /* StreamChatUI.framework in Embed Frameworks */,
 				79940B89258398A500791EAE /* StreamChat.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADCAD66A25A389E6000D1A71 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				ADCAD66725A389E6000D1A71 /* StreamChat.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1397,6 +1417,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADCAD66625A389E6000D1A71 /* StreamChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2900,10 +2921,12 @@
 				ADCAD64B25A388B4000D1A71 /* Sources */,
 				ADCAD64C25A388B4000D1A71 /* Frameworks */,
 				ADCAD64D25A388B4000D1A71 /* Resources */,
+				ADCAD66A25A389E6000D1A71 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				ADCAD66925A389E6000D1A71 /* PBXTargetDependency */,
 			);
 			name = iMessageClone;
 			productName = iMessageClone;
@@ -3214,7 +3237,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
+			shellScript = "/opt/homebrew/bin/mint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3838,6 +3861,11 @@
 			isa = PBXTargetDependency;
 			target = 799C941A247D2F80001F1104 /* StreamChat */;
 			targetProxy = 799C9457247D59B1001F1104 /* PBXContainerItemProxy */;
+		};
+		ADCAD66925A389E6000D1A71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 799C941A247D2F80001F1104 /* StreamChat */;
+			targetProxy = ADCAD66825A389E6000D1A71 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
