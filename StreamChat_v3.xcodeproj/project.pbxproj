@@ -476,8 +476,11 @@
 		8AE335A924FCF999002B6677 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE335A624FCF999002B6677 /* InternetConnection.swift */; };
 		8AE335AA24FCF99E002B6677 /* InternetConnection_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE335A424FCF999002B6677 /* InternetConnection_Tests.swift */; };
 		8AE8950D24D8660800E852EC /* PingPongEmojiFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE8950B24D85FF200E852EC /* PingPongEmojiFormatter.swift */; };
+		AD0AE9DD25A48BAA008FAFE3 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */; };
+		AD0AE9EC25A492B5008FAFE3 /* ChatClient+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AE9EB25A492B5008FAFE3 /* ChatClient+shared.swift */; };
+		AD0AEA0F25A4C769008FAFE3 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AEA0E25A4C769008FAFE3 /* RemoteImage.swift */; };
 		ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */; };
-		ADCAD65425A388B4000D1A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* ContentView.swift */; };
+		ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* LoginView.swift */; };
 		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
 		ADCAD65925A388B5000D1A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */; };
 		ADCAD66625A389E6000D1A71 /* StreamChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799C941B247D2F80001F1104 /* StreamChat.framework */; };
@@ -1210,9 +1213,12 @@
 		8AE335A524FCF999002B6677 /* Reachability_Vendor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability_Vendor.swift; sourceTree = "<group>"; };
 		8AE335A624FCF999002B6677 /* InternetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
 		8AE8950B24D85FF200E852EC /* PingPongEmojiFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingPongEmojiFormatter.swift; sourceTree = "<group>"; };
+		AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListView.swift; sourceTree = "<group>"; };
+		AD0AE9EB25A492B5008FAFE3 /* ChatClient+shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatClient+shared.swift"; sourceTree = "<group>"; };
+		AD0AEA0E25A4C769008FAFE3 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		ADCAD64F25A388B4000D1A71 /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCloneApp.swift; sourceTree = "<group>"; };
-		ADCAD65325A388B4000D1A71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ADCAD65325A388B4000D1A71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		ADCAD65525A388B5000D1A71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ADCAD65825A388B5000D1A71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ADCAD65A25A388B5000D1A71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -2554,11 +2560,54 @@
 			path = "Internet Connection";
 			sourceTree = "<group>";
 		};
+		AD0AE9D925A485BF008FAFE3 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				ADCAD65325A388B4000D1A71 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AD0AE9DA25A485C5008FAFE3 /* ContactsList */ = {
+			isa = PBXGroup;
+			children = (
+				AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */,
+			);
+			path = ContactsList;
+			sourceTree = "<group>";
+		};
+		AD0AE9DB25A485DB008FAFE3 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		AD0AE9EA25A4929F008FAFE3 /* StreamChat */ = {
+			isa = PBXGroup;
+			children = (
+				AD0AE9EB25A492B5008FAFE3 /* ChatClient+shared.swift */,
+			);
+			path = StreamChat;
+			sourceTree = "<group>";
+		};
+		AD0AE9F925A4C740008FAFE3 /* CommonViews */ = {
+			isa = PBXGroup;
+			children = (
+				AD0AEA0E25A4C769008FAFE3 /* RemoteImage.swift */,
+			);
+			path = CommonViews;
+			sourceTree = "<group>";
+		};
 		ADCAD65025A388B4000D1A71 /* iMessageClone */ = {
 			isa = PBXGroup;
 			children = (
 				ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */,
-				ADCAD65325A388B4000D1A71 /* ContentView.swift */,
+				AD0AE9F925A4C740008FAFE3 /* CommonViews */,
+				AD0AE9EA25A4929F008FAFE3 /* StreamChat */,
+				AD0AE9D925A485BF008FAFE3 /* Login */,
+				AD0AE9DA25A485C5008FAFE3 /* ContactsList */,
+				AD0AE9DB25A485DB008FAFE3 /* Chat */,
 				ADCAD65525A388B5000D1A71 /* Assets.xcassets */,
 				ADCAD65A25A388B5000D1A71 /* Info.plist */,
 				ADCAD65725A388B5000D1A71 /* Preview Content */,
@@ -3809,8 +3858,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADCAD65425A388B4000D1A71 /* ContentView.swift in Sources */,
+				ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */,
+				AD0AE9DD25A48BAA008FAFE3 /* ContactsListView.swift in Sources */,
 				ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */,
+				AD0AEA0F25A4C769008FAFE3 /* RemoteImage.swift in Sources */,
+				AD0AE9EC25A492B5008FAFE3 /* ChatClient+shared.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
