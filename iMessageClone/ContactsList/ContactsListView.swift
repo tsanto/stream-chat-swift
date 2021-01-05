@@ -7,22 +7,35 @@
 //
 
 import SwiftUI
+import StreamChat
 
 struct ContactsListView: View {
-    var contacts: [ContactsListCell.Details] = [
-        .init(
-            name: "Nuno Vieira",
-            msg: "Hello friend!",
-            date: "23 days ago",
-            imageUrl: URL(string: "https://www.nunovieira.dev/static/media/nv.25e2dde1.jpg")
+    @ObservedObject var channelList: ChatChannelListController.ObservableObject
+    
+    init() {
+        let chatClient = ChatClient.shared
+        let channelListController = chatClient.channelListController(
+            query: ChannelListQuery(filter: .in("members", values: [chatClient.currentUserId]))
         )
-    ]
+        channelList = channelListController.observableObject
+    }
     
     var body: some View {
-        List(contacts, id: \.name) { contact in
-            ContactsListCell(details: contact)
+        List(channelList.channels, id: \.self) { channel in
+            let latestMessage = channel.latestMessages.last
+            ContactsListCell(
+                details: ContactsListCell.Details(
+                    name: channel.name ?? "",
+                    msg: latestMessage?.text ?? "",
+                    date: "latestMessage!.createdAt",
+                    imageUrl: latestMessage?.author.imageURL
+                )
+            )
         }
         .navigationTitle("Messages")
+        .onAppear {
+            channelList.controller.synchronize()
+        }
     }
 }
 

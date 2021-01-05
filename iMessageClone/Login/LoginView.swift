@@ -22,11 +22,14 @@ struct LoginView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                Section {
-                    LoginTextfield(label: "Username", text: $loginDetails.username)
-                    LoginTextfield(label: "Name", text: $loginDetails.name)
-                    NavigationLink(destination: ContactsListView(), isActive: $success) {
+            VStack {
+                NavigationLink(destination: ContactsListView(), isActive: $success) {
+                    EmptyView()
+                }
+                Form {
+                    Section {
+                        LoginTextfield(label: "Username", text: $loginDetails.username)
+                        LoginTextfield(label: "Name", text: $loginDetails.name)
                         Button("Login", action: logIn)
                     }
                 }
