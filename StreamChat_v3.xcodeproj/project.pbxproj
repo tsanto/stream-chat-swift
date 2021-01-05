@@ -479,6 +479,7 @@
 		AD0AE9DD25A48BAA008FAFE3 /* ContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */; };
 		AD0AE9EC25A492B5008FAFE3 /* ChatClient+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AE9EB25A492B5008FAFE3 /* ChatClient+shared.swift */; };
 		AD0AEA0F25A4C769008FAFE3 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AEA0E25A4C769008FAFE3 /* RemoteImage.swift */; };
+		AD0AEA3225A4FFC5008FAFE3 /* ContactsListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AEA3125A4FFC5008FAFE3 /* ContactsListContainerView.swift */; };
 		ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */; };
 		ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* LoginView.swift */; };
 		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
@@ -1216,6 +1217,7 @@
 		AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListView.swift; sourceTree = "<group>"; };
 		AD0AE9EB25A492B5008FAFE3 /* ChatClient+shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatClient+shared.swift"; sourceTree = "<group>"; };
 		AD0AEA0E25A4C769008FAFE3 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
+		AD0AEA3125A4FFC5008FAFE3 /* ContactsListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListContainerView.swift; sourceTree = "<group>"; };
 		ADCAD64F25A388B4000D1A71 /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCloneApp.swift; sourceTree = "<group>"; };
 		ADCAD65325A388B4000D1A71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -2571,16 +2573,10 @@
 		AD0AE9DA25A485C5008FAFE3 /* ContactsList */ = {
 			isa = PBXGroup;
 			children = (
+				AD0AEA3125A4FFC5008FAFE3 /* ContactsListContainerView.swift */,
 				AD0AE9DC25A48BAA008FAFE3 /* ContactsListView.swift */,
 			);
 			path = ContactsList;
-			sourceTree = "<group>";
-		};
-		AD0AE9DB25A485DB008FAFE3 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Chat;
 			sourceTree = "<group>";
 		};
 		AD0AE9EA25A4929F008FAFE3 /* StreamChat */ = {
@@ -2607,7 +2603,6 @@
 				AD0AE9EA25A4929F008FAFE3 /* StreamChat */,
 				AD0AE9D925A485BF008FAFE3 /* Login */,
 				AD0AE9DA25A485C5008FAFE3 /* ContactsList */,
-				AD0AE9DB25A485DB008FAFE3 /* Chat */,
 				ADCAD65525A388B5000D1A71 /* Assets.xcassets */,
 				ADCAD65A25A388B5000D1A71 /* Info.plist */,
 				ADCAD65725A388B5000D1A71 /* Preview Content */,
@@ -3861,6 +3856,7 @@
 				ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */,
 				AD0AE9DD25A48BAA008FAFE3 /* ContactsListView.swift in Sources */,
 				ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */,
+				AD0AEA3225A4FFC5008FAFE3 /* ContactsListContainerView.swift in Sources */,
 				AD0AEA0F25A4C769008FAFE3 /* RemoteImage.swift in Sources */,
 				AD0AE9EC25A492B5008FAFE3 /* ChatClient+shared.swift in Sources */,
 			);

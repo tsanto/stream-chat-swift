@@ -12,12 +12,8 @@ import StreamChat
 struct ContactsListView: View {
     @ObservedObject var channelList: ChatChannelListController.ObservableObject
     
-    init() {
-        let chatClient = ChatClient.shared
-        let channelListController = chatClient.channelListController(
-            query: ChannelListQuery(filter: .in("members", values: [chatClient.currentUserId]))
-        )
-        channelList = channelListController.observableObject
+    init(channelList: ChatChannelListController.ObservableObject) {
+        self.channelList = channelList
     }
     
     var body: some View {
@@ -80,7 +76,12 @@ extension ContactsListCell {
 struct ContactsListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ContactsListView()
+            let chatClient = ChatClient.shared
+            let channelListController = chatClient.channelListController(
+                query: ChannelListQuery(filter: .in("members", values: [chatClient.currentUserId]))
+            )
+            let channelList = channelListController.observableObject
+            ContactsListView(channelList: channelList)
         }
     }
 }

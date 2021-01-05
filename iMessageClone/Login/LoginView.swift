@@ -23,7 +23,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: ContactsListView(), isActive: $success) {
+                NavigationLink(destination: ContactsListContainerView(), isActive: $success) {
                     EmptyView()
                 }
                 Form {
