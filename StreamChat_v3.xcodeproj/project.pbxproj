@@ -2309,7 +2309,6 @@
 				228C7EE42583AF4800AAE9E3 /* UITextView+Extensions.swift */,
 				2241167F258A91280034184D /* String+Extensions.swift */,
 				88A11B092590AFBB0000AC24 /* ChatMessage+Extensions.swift */,
-				880656F8259A2C0800E31D23 /* ChatMessageAttachment+Extensions.swift */,
 				22C23599259CA87B00DC805A /* Animation.swift */,
 				79CCB66D259CBC4F0082F172 /* ChannelNamer.swift */,
 			);
@@ -3187,7 +3186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mint run swiftlint lint ./Sources_v3/StreamChatUI ./Tests_v3/StreamChatUI --config .swiftlint.yml \n\n";
+			shellScript = "source ~/.zshrc\nmint run swiftlint lint ./Sources_v3/StreamChatUI ./Tests_v3/StreamChatUI --config .swiftlint.yml \n\n";
 		};
 		792DDA73256FB723001DB91B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3223,7 +3222,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mint run swiftlint lint ./Sample_v3 --config .swiftlint.yml\n";
+			shellScript = "source ~/.zshrc\nmint run swiftlint lint ./Sample_v3 --config .swiftlint.yml\n";
 		};
 		88F0D6EB257E40B300F4B050 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3241,7 +3240,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mint run swiftgen config run --config ./Sources_v3/StreamChatUI/.swiftgen.yml\n";
+			shellScript = "source ~/.zshrc\nmint run swiftgen config run --config ./Sources_v3/StreamChatUI/.swiftgen.yml\n";
 		};
 		8ABC329924EAC40700CFC920 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3260,7 +3259,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
+			shellScript = "source ~/.zshrc\nmint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
