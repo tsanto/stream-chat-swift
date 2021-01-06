@@ -78,7 +78,7 @@ open class MessageComposerInputTextView<ExtraData: ExtraDataTypes>: UITextView,
         placeholderLabel.pin(anchors: [.centerY], to: self)
         
         isScrollEnabled = false
-        
+                
         textViewHeightConstraint.isActive = true
     }
     
@@ -91,7 +91,17 @@ open class MessageComposerInputTextView<ExtraData: ExtraDataTypes>: UITextView,
         
     @objc func textDidChange() {
         placeholderLabel.isHidden = !text.isEmpty
-        textViewHeightConstraint.constant = calculatedTextHeight() + textContainerInset.bottom + textContainerInset.top
-        layoutIfNeeded()
+    
+        if numberOfLines() >= 6 {
+            isScrollEnabled = true
+            textViewHeightConstraint.constant = heightFor(numberOfLines: 6) + textContainerInset.bottom + textContainerInset.top
+        } else {
+            isScrollEnabled = false
+            textViewHeightConstraint.constant = calculatedTextHeight() + textContainerInset.bottom + textContainerInset.top
+        }
+        
+        print(contentSize)
+        print(frame)
+        print(bounds)
     }
 }
