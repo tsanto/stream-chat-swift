@@ -485,6 +485,7 @@
 		AD71507125A5E9320072364F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71507025A5E9320072364F /* ChatView.swift */; };
 		AD71507925A600140072364F /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71507825A600140072364F /* MessageComposerView.swift */; };
 		AD71508125A601280072364F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71508025A601280072364F /* MessageView.swift */; };
+		AD71508F25A61F8A0072364F /* ChatContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71508E25A61F8A0072364F /* ChatContainerView.swift */; };
 		ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */; };
 		ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* LoginView.swift */; };
 		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
@@ -1228,6 +1229,7 @@
 		AD71507025A5E9320072364F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		AD71507825A600140072364F /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
 		AD71508025A601280072364F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		AD71508E25A61F8A0072364F /* ChatContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatContainerView.swift; sourceTree = "<group>"; };
 		ADCAD64F25A388B4000D1A71 /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCloneApp.swift; sourceTree = "<group>"; };
 		ADCAD65325A388B4000D1A71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -2610,6 +2612,7 @@
 		AD71506F25A5E9210072364F /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
+				AD71508E25A61F8A0072364F /* ChatContainerView.swift */,
 				AD71507025A5E9320072364F /* ChatView.swift */,
 				AD71508025A601280072364F /* MessageView.swift */,
 				AD71507825A600140072364F /* MessageComposerView.swift */,
@@ -3876,6 +3879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD71508F25A61F8A0072364F /* ChatContainerView.swift in Sources */,
 				AD71507925A600140072364F /* MessageComposerView.swift in Sources */,
 				ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */,
 				AD0AE9DD25A48BAA008FAFE3 /* ChannelListView.swift in Sources */,

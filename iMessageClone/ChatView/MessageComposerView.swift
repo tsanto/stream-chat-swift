@@ -20,7 +20,10 @@ struct MessageComposerView: View {
             Button(action: action) {
                 Text("Send")
             }.disabled(typingMessage.isEmpty)
-        }.frame(minHeight: CGFloat(50)).padding()
+        }
+        .frame(minHeight: CGFloat(50))
+        .padding(.trailing)
+        .padding(.leading)
     }
 }
 

@@ -24,7 +24,7 @@ struct ChannelListView: View {
     
     var body: some View {
         List(channelList.channels, id: \.name) { channel in
-            let latestMessage = channel.latestMessages.last
+            let latestMessage = channel.latestMessages.first
             let name = channel.name ?? ""
             let msg = latestMessage?.text ?? ""
             let imageUrl = latestMessage?.author.imageURL

@@ -9,33 +9,6 @@
 import SwiftUI
 import StreamChat
 
-struct ChatContainerView: View {
-    @ObservedObject var chatController: ChatChannelController.ObservableObject
-    
-    var body: some View {
-        let messages = chatController.messages.map { message -> Message in
-            return Message(
-                id: message.id,
-                content: message.text,
-                user: User(
-                    name: message.author.name ?? "",
-                    avatarUrl: message.author.imageURL,
-                    isCurrentUser: message.author.id == ChatClient.shared.currentUserId
-                )
-            )
-        }
-        ChatView(
-            channelName: chatController.channel?.name ?? "",
-            messages: messages,
-            newMessageAction: sendNewMessage(_:)
-        )
-    }
-    
-    func sendNewMessage(_ message: String) {
-        chatController.controller.createNewMessage(text: message)
-    }
-}
-
 struct ChatView: View {
     
     @State private var typingMessage: String = ""
@@ -47,9 +20,16 @@ struct ChatView: View {
     var body: some View {
         VStack {
             ScrollView {
-                LazyVStack {
-                    ForEach(messages, id: \.self) { msg in
-                        MessageView(message: msg)
+                ScrollViewReader { scrollView in
+                    LazyVStack {
+                        ForEach(messages, id: \.id) { msg in
+                            MessageView(message: msg).id(msg.id)
+                        }
+                        .onChange(of: messages) { messages in
+                            withAnimation(.easeInOut(duration: 0.250)) {
+                                scrollView.scrollTo(messages.last?.id)
+                            }
+                        }
                     }
                 }
             }
