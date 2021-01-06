@@ -371,6 +371,8 @@
 		88A00DD02525F08000259AB4 /* ModerationEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A00DCF2525F08000259AB4 /* ModerationEndpoints.swift */; };
 		88A11B0A2590AFBB0000AC24 /* ChatMessage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A11B092590AFBB0000AC24 /* ChatMessage+Extensions.swift */; };
 		88A11B302590CC860000AC24 /* ChatMessageErrorIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A11B2F2590CC860000AC24 /* ChatMessageErrorIndicator.swift */; };
+		88A6A06625A5E2D700DA366E /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 88A6A06525A5E2D700DA366E /* KeychainSwift */; };
+		88A6A06E25A5E70100DA366E /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A6A06D25A5E70100DA366E /* TokenStorage.swift */; };
 		88A8CF0B256E7AC8004EA4C7 /* ChatMessageGroupPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8CF0A256E7AC8004EA4C7 /* ChatMessageGroupPart.swift */; };
 		88A8CF16256E7BDA004EA4C7 /* ChatMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8CF15256E7BDA004EA4C7 /* ChatMessageContentView.swift */; };
 		88A8CF20256E7C06004EA4C7 /* ChatMessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A8CF1F256E7C06004EA4C7 /* ChatMessageBubbleView.swift */; };
@@ -1096,6 +1098,7 @@
 		88A00DCF2525F08000259AB4 /* ModerationEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModerationEndpoints.swift; sourceTree = "<group>"; };
 		88A11B092590AFBB0000AC24 /* ChatMessage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMessage+Extensions.swift"; sourceTree = "<group>"; };
 		88A11B2F2590CC860000AC24 /* ChatMessageErrorIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageErrorIndicator.swift; sourceTree = "<group>"; };
+		88A6A06D25A5E70100DA366E /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		88A8CF0A256E7AC8004EA4C7 /* ChatMessageGroupPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageGroupPart.swift; sourceTree = "<group>"; };
 		88A8CF15256E7BDA004EA4C7 /* ChatMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageContentView.swift; sourceTree = "<group>"; };
 		88A8CF1F256E7C06004EA4C7 /* ChatMessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageBubbleView.swift; sourceTree = "<group>"; };
@@ -1431,6 +1434,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A6A06625A5E2D700DA366E /* KeychainSwift in Frameworks */,
 				79A4AE112536EE5500C32A74 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1722,6 +1726,7 @@
 				88EA9AD725470F6A007EE76B /* Dictionary+Extensions.swift */,
 				88EA9AE125471999007EE76B /* Dictionary_Tests.swift */,
 				881506EB258212BF0013935B /* MultipartFormData.swift */,
+				88A6A06D25A5E70100DA366E /* TokenStorage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2946,6 +2951,7 @@
 			name = StreamChat;
 			packageProductDependencies = (
 				79A4AE102536EE5500C32A74 /* Starscream */,
+				88A6A06525A5E2D700DA366E /* KeychainSwift */,
 			);
 			productName = Sources_v3;
 			productReference = 799C941B247D2F80001F1104 /* StreamChat.framework */;
@@ -3021,6 +3027,7 @@
 				79A4AE0F2536EE5500C32A74 /* XCRemoteSwiftPackageReference "Starscream" */,
 				799ADAAD2563FFA1006D43F9 /* XCRemoteSwiftPackageReference "Nuke" */,
 				DB823105259C271C00E7D7FE /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				88A6A06425A5E2D700DA366E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 8AD5EC9022E9A3E8005CFAC9 /* Products */;
 			projectDirPath = "";
@@ -3539,6 +3546,7 @@
 				8A0CC9F124C606EF00705CF9 /* ReactionEvents.swift in Sources */,
 				79877A0F2498E4BC00015F8B /* ChannelId.swift in Sources */,
 				882C5760252C7CC400E60C44 /* ChannelMemberListQueryDTO.swift in Sources */,
+				88A6A06E25A5E70100DA366E /* TokenStorage.swift in Sources */,
 				792A4F492480107A00EAF71D /* Sorting.swift in Sources */,
 				7937282A2498FFD300E13FE5 /* MemberPayload.swift in Sources */,
 				799C944C247D5766001F1104 /* ChannelController.swift in Sources */,
@@ -4878,6 +4886,14 @@
 				minimumVersion = 4.0.4;
 			};
 		};
+		88A6A06425A5E2D700DA366E /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 		DB823105259C271C00E7D7FE /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
@@ -4903,6 +4919,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79A4AE0F2536EE5500C32A74 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		88A6A06525A5E2D700DA366E /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88A6A06425A5E2D700DA366E /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		DB823106259C271C00E7D7FE /* SwiftyGif */ = {
 			isa = XCSwiftPackageProductDependency;

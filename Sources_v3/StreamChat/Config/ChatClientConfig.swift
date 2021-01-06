@@ -50,6 +50,8 @@ public struct ChatClientConfig {
     /// refreshed.
     public var tokenProvider: TokenProvider?
     
+    public var keychainAccessGroup: String?
+    
     /// Creates a new instance of `ChatClientConfig`.
     ///
     /// - Parameter apiKey: The API key of the chat app the `ChatClient` connects to.

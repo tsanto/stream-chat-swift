@@ -209,8 +209,12 @@ public class _ChatClient<ExtraData: ExtraDataTypes> {
     @Atomic var connectionIdWaiters: [(String?) -> Void] = []
     
     /// The token of the current user. If the current user is anonymous, the token is `nil`.
-    @Atomic var currentToken: Token?
-    
+    private lazy var tokenStorage = environment.tokenStorage(config.keychainAccessGroup)
+    public internal(set) var currentToken: Token? {
+        get { tokenStorage.token }
+        set { tokenStorage.token = newValue }
+    }
+
     /// Creates a new instance of `ChatClient`.
     ///
     /// - Parameter config: The config object for the `Client`. See `ChatClientConfig` for all configuration options.
@@ -251,7 +255,11 @@ public class _ChatClient<ExtraData: ExtraDataTypes> {
         self.config = config
         self.environment = environment
         self.workerBuilders = workerBuilders
-        
+
+        if let existedUserID = databaseContainer.viewContext.currentUser()?.user.id {
+            self.currentUserId = existedUserID
+        }
+
         createBackgroundWorkers()
     }
     
@@ -322,6 +330,8 @@ extension _ChatClient {
         var notificationCenterBuilder: ([EventMiddleware]) -> EventNotificationCenter = EventNotificationCenter.init
         
         var internetConnection: () -> InternetConnection = { InternetConnection() }
+
+        var tokenStorage = KeychainTokenStorage.init
     }
 }
 
