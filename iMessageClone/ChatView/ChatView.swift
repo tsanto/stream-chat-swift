@@ -24,7 +24,15 @@ struct ChatContainerView: View {
                 )
             )
         }
-        ChatView(channelName: chatController.channel?.name ?? "", messages: messages)
+        ChatView(
+            channelName: chatController.channel?.name ?? "",
+            messages: messages,
+            newMessageAction: sendNewMessage(_:)
+        )
+    }
+    
+    func sendNewMessage(_ message: String) {
+        chatController.controller.createNewMessage(text: message)
     }
 }
 
@@ -34,6 +42,7 @@ struct ChatView: View {
     
     let channelName: String
     var messages: [Message]
+    let newMessageAction: (String) -> Void
     
     var body: some View {
         VStack {
@@ -52,7 +61,8 @@ struct ChatView: View {
     }
     
     func sendMessage() {
-        print("Send Message")
+        guard !typingMessage.isEmpty else { return }
+        newMessageAction(typingMessage)
         typingMessage = ""
     }
 }
@@ -66,7 +76,7 @@ struct ChatView_Previews: PreviewProvider {
                 Message(id: "2", content: "Hello!", user: .init(name: "Nuno", isCurrentUser: true)),
                 Message(id: "3", content: "Hello2!", user: .init(name: "Nuno", isCurrentUser: true))
             ]
-            ChatView(channelName: "Order 66", messages: dummyData)
+            ChatView(channelName: "Order 66", messages: dummyData, newMessageAction: { _ in })
         }
     }
 }
