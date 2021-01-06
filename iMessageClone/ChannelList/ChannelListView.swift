@@ -30,8 +30,16 @@ struct ChannelListView: View {
             let imageUrl = latestMessage?.author.imageURL
             let date = latestMessage?.createdAt ?? Date()
             let dateFormatted = dateFormatter.string(from: date)
-            let channelItem = ChannelListItem(name: name, msg: msg, date: dateFormatted, imageUrl: imageUrl)
-            NavigationLink(destination: ChatView(channelName: name)) {
+            let channelItem = ChannelListItem(
+                name: name,
+                msg: msg,
+                date: dateFormatted,
+                imageUrl: imageUrl
+            )
+            let chatController = channelList.controller.client
+                .channelController(for: channel.cid)
+                .observableObject
+            NavigationLink(destination: ChatContainerView(chatController: chatController)) {
                 ChannelListCell(
                     item: channelItem
                 )

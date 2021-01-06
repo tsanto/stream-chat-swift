@@ -7,23 +7,39 @@
 //
 
 import SwiftUI
+import StreamChat
+
+struct ChatContainerView: View {
+    @ObservedObject var chatController: ChatChannelController.ObservableObject
+    
+    var body: some View {
+        let messages = chatController.messages.map { message -> Message in
+            return Message(
+                id: message.id,
+                content: message.text,
+                user: User(
+                    name: message.author.name ?? "",
+                    avatarUrl: message.author.imageURL,
+                    isCurrentUser: message.author.id == ChatClient.shared.currentUserId
+                )
+            )
+        }
+        ChatView(channelName: chatController.channel?.name ?? "", messages: messages)
+    }
+}
 
 struct ChatView: View {
     
     @State private var typingMessage: String = ""
-    @State private var dummyData: [Message] = [
-        Message(content: "Hello Friend", user: .init(name: "Yoda")),
-        Message(content: "Hello!", user: .init(name: "Nuno", isCurrentUser: true)),
-        Message(content: "Hello2!", user: .init(name: "Nuno", isCurrentUser: true))
-    ]
     
     let channelName: String
+    var messages: [Message]
     
     var body: some View {
         VStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(dummyData, id: \.self) { msg in
+                    ForEach(messages, id: \.self) { msg in
                         MessageView(message: msg)
                     }
                 }
@@ -37,11 +53,6 @@ struct ChatView: View {
     
     func sendMessage() {
         print("Send Message")
-        let newMessage = Message(
-            content: typingMessage,
-            user: .init(name: "Nuno", isCurrentUser: true)
-        )
-        dummyData.append(newMessage)
         typingMessage = ""
     }
 }
@@ -50,7 +61,12 @@ struct ChatView: View {
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ChatView(channelName: "Order 66")
+            let dummyData: [Message] = [
+                Message(id: "1", content: "Hello Friend", user: .init(name: "Yoda")),
+                Message(id: "2", content: "Hello!", user: .init(name: "Nuno", isCurrentUser: true)),
+                Message(id: "3", content: "Hello2!", user: .init(name: "Nuno", isCurrentUser: true))
+            ]
+            ChatView(channelName: "Order 66", messages: dummyData)
         }
     }
 }

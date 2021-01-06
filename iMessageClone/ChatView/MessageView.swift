@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct Message: Hashable {
+    var id: String
     var content: String
     var user: User
 }
@@ -62,6 +63,7 @@ struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         MessageView(
             message: Message(
+                id: "123",
                 content: "There are a lot of premium iOS templates on iosapptemplates.com",
                 user: .init(name: "Nuno", avatarUrl: nil)
             )
