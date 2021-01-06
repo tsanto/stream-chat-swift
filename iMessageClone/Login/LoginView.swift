@@ -15,15 +15,18 @@ struct LoginDetails {
 }
 
 struct LoginView: View {
-    @State var loginDetails: LoginDetails = LoginDetails(username: "luke_skywalker", name: "Luke Skywalker")
-    @State var success: Bool = false
-    @State var shouldShowErrorAlert: Bool = false
-    @State var errorMessage: String = ""
+    @State private var loginDetails: LoginDetails = LoginDetails(
+        username: "luke_skywalker",
+        name: "Luke Skywalker"
+    )
+    @State private var success: Bool = false
+    @State private var shouldShowErrorAlert: Bool = false
+    @State private var errorMessage: String = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: ContactsListContainerView(), isActive: $success) {
+                NavigationLink(destination: ChannelListContainerView(), isActive: $success) {
                     EmptyView()
                 }
                 Form {

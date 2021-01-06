@@ -9,13 +9,13 @@
 import SwiftUI
 import StreamChat
 
-struct ContactsListContainerView: View {
+struct ChannelListContainerView: View {
     var body: some View {
         let chatClient = ChatClient.shared
         let channelListController = chatClient.channelListController(
             query: ChannelListQuery(filter: .in("members", values: [chatClient.currentUserId]))
         )
         let channelList = channelListController.observableObject
-        ContactsListView(channelList: channelList)
+        ChannelListView(channelList: channelList)
     }
 }
