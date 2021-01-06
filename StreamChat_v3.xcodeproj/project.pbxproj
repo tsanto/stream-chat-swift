@@ -482,6 +482,9 @@
 		AD0AEA3225A4FFC5008FAFE3 /* ChannelListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0AEA3125A4FFC5008FAFE3 /* ChannelListContainerView.swift */; };
 		AD71506025A5DC2A0072364F /* ChannelListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71505F25A5DC2A0072364F /* ChannelListCell.swift */; };
 		AD71506825A5DC8E0072364F /* ChannelListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71506725A5DC8E0072364F /* ChannelListItem.swift */; };
+		AD71507125A5E9320072364F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71507025A5E9320072364F /* ChatView.swift */; };
+		AD71507925A600140072364F /* MessageComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71507825A600140072364F /* MessageComposerView.swift */; };
+		AD71508125A601280072364F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD71508025A601280072364F /* MessageView.swift */; };
 		ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */; };
 		ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCAD65325A388B4000D1A71 /* LoginView.swift */; };
 		ADCAD65625A388B5000D1A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADCAD65525A388B5000D1A71 /* Assets.xcassets */; };
@@ -1222,6 +1225,9 @@
 		AD0AEA3125A4FFC5008FAFE3 /* ChannelListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListContainerView.swift; sourceTree = "<group>"; };
 		AD71505F25A5DC2A0072364F /* ChannelListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListCell.swift; sourceTree = "<group>"; };
 		AD71506725A5DC8E0072364F /* ChannelListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListItem.swift; sourceTree = "<group>"; };
+		AD71507025A5E9320072364F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		AD71507825A600140072364F /* MessageComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposerView.swift; sourceTree = "<group>"; };
+		AD71508025A601280072364F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		ADCAD64F25A388B4000D1A71 /* iMessageClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMessageClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADCAD65125A388B4000D1A71 /* iMessageCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iMessageCloneApp.swift; sourceTree = "<group>"; };
 		ADCAD65325A388B4000D1A71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -2601,6 +2607,16 @@
 			path = CommonViews;
 			sourceTree = "<group>";
 		};
+		AD71506F25A5E9210072364F /* ChatView */ = {
+			isa = PBXGroup;
+			children = (
+				AD71507025A5E9320072364F /* ChatView.swift */,
+				AD71508025A601280072364F /* MessageView.swift */,
+				AD71507825A600140072364F /* MessageComposerView.swift */,
+			);
+			path = ChatView;
+			sourceTree = "<group>";
+		};
 		ADCAD65025A388B4000D1A71 /* iMessageClone */ = {
 			isa = PBXGroup;
 			children = (
@@ -2609,6 +2625,7 @@
 				AD0AE9EA25A4929F008FAFE3 /* StreamChat */,
 				AD0AE9D925A485BF008FAFE3 /* Login */,
 				AD0AE9DA25A485C5008FAFE3 /* ChannelList */,
+				AD71506F25A5E9210072364F /* ChatView */,
 				ADCAD65525A388B5000D1A71 /* Assets.xcassets */,
 				ADCAD65A25A388B5000D1A71 /* Info.plist */,
 				ADCAD65725A388B5000D1A71 /* Preview Content */,
@@ -3859,10 +3876,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD71507925A600140072364F /* MessageComposerView.swift in Sources */,
 				ADCAD65425A388B4000D1A71 /* LoginView.swift in Sources */,
 				AD0AE9DD25A48BAA008FAFE3 /* ChannelListView.swift in Sources */,
 				ADCAD65225A388B4000D1A71 /* iMessageCloneApp.swift in Sources */,
 				AD0AEA3225A4FFC5008FAFE3 /* ChannelListContainerView.swift in Sources */,
+				AD71507125A5E9320072364F /* ChatView.swift in Sources */,
+				AD71508125A601280072364F /* MessageView.swift in Sources */,
 				AD71506825A5DC8E0072364F /* ChannelListItem.swift in Sources */,
 				AD71506025A5DC2A0072364F /* ChannelListCell.swift in Sources */,
 				AD0AEA0F25A4C769008FAFE3 /* RemoteImage.swift in Sources */,

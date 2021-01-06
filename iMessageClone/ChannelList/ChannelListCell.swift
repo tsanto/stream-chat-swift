@@ -13,7 +13,7 @@ struct ChannelListCell: View {
     
     var body: some View {
         HStack(spacing: 12){
-            RemoteImage(withURL: item.imageUrl)
+            RemoteImage(item.imageUrl)
                 .frame(width: 55, height: 55)
                 .cornerRadius(50)
             

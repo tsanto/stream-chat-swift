@@ -13,7 +13,7 @@ struct RemoteImage: View {
     @ObservedObject var imageLoader: ImageLoader
     @State private var image: UIImage = UIImage()
     
-    init(withURL url: URL?) {
+    init(_ url: URL?) {
         imageLoader = ImageLoader(url: url)
     }
     
@@ -51,7 +51,7 @@ class ImageLoader: ObservableObject {
 struct RemoteImage_Previews: PreviewProvider {
     static var previews: some View {
         RemoteImage(
-            withURL: URL(string: "https://www.nunovieira.dev/static/media/nv.25e2dde1.jpg")
+            URL(string: "https://www.nunovieira.dev/static/media/nv.25e2dde1.jpg")
         )
         .frame(width:100, height:100)
         .cornerRadius(50)

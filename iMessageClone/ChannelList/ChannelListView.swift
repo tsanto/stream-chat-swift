@@ -31,9 +31,11 @@ struct ChannelListView: View {
             let date = latestMessage?.createdAt ?? Date()
             let dateFormatted = dateFormatter.string(from: date)
             let channelItem = ChannelListItem(name: name, msg: msg, date: dateFormatted, imageUrl: imageUrl)
-            ChannelListCell(
-                item: channelItem
-            )
+            NavigationLink(destination: ChatView(channelName: name)) {
+                ChannelListCell(
+                    item: channelItem
+                )
+            }
         }
         .navigationTitle("Messages")
         .onAppear {
