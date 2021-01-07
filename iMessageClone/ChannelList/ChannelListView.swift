@@ -23,11 +23,14 @@ struct ChannelListView: View {
     }
     
     var body: some View {
-        List(channelList.channels, id: \.name) { channel in
+        List(channelList.channels, id: \.name) { (channel: ChatChannel) in
+            let recipient = channel.cachedMembers.first { member in
+                member.id != ChatClient.shared.currentUserId
+            } ?? channel.cachedMembers.first
             let latestMessage = channel.latestMessages.first
             let name = channel.name ?? ""
             let msg = latestMessage?.text ?? ""
-            let imageUrl = latestMessage?.author.imageURL
+            let imageUrl = recipient?.imageURL
             let date = latestMessage?.createdAt ?? Date()
             let dateFormatted = dateFormatter.string(from: date)
             let channelItem = ChannelListItem(
