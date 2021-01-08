@@ -3234,7 +3234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/homebrew/bin/mint run swiftlint lint ./Sources_v3/StreamChatUI ./Tests_v3/StreamChatUI --config .swiftlint.yml \n\n";
+			shellScript = "mint run swiftlint lint ./Sources_v3/StreamChatUI ./Tests_v3/StreamChatUI --config .swiftlint.yml \n\n";
 		};
 		792DDA73256FB723001DB91B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3270,7 +3270,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/homebrew/bin/mint run swiftlint lint ./Sample_v3 --config .swiftlint.yml\n";
+			shellScript = "mint run swiftlint lint ./Sample_v3 --config .swiftlint.yml\n";
 		};
 		88F0D6EB257E40B300F4B050 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3307,7 +3307,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/homebrew/bin/mint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
+			shellScript = "mint run swiftlint lint ./Sources_v3/StreamChat ./Tests_v3/StreamChat --config .swiftlint.yml \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
