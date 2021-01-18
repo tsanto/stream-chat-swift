@@ -15,14 +15,14 @@ open class ChatChannelAvatarView<ExtraData: ExtraDataTypes>: AvatarView {
     }
     
     override open var intrinsicContentSize: CGSize {
-        .init(width: 56, height: 56)
+        .init(width: 40, height: 40)
     }
-    
+
     // MARK: - Overrides
     
     override open func setUpLayout() {
         super.setUpLayout()
-        
+
         widthAnchor.pin(equalTo: heightAnchor, multiplier: 1).isActive = true
         embed(imageView)
         addSubview(onlineIndicatorView)
