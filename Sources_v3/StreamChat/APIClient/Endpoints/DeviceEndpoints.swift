@@ -1,5 +1,5 @@
 //
-// Copyright © 2020 Stream.io Inc. All rights reserved.
+// Copyright © 2021 Stream.io Inc. All rights reserved.
 //
 
 import Foundation
@@ -17,7 +17,7 @@ extension Endpoint {
             path: "devices",
             method: .post,
             queryItems: nil,
-            requiresConnectionId: false,
+            requiresConnectionId: true,
             body: ["user_id": userId, "id": deviceId, "push_provider": "apn"]
         )
     }

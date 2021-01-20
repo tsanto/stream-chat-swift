@@ -146,6 +146,7 @@
 		793061A12577C8B4005CF846 /* ChatClient_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793061A02577C8B4005CF846 /* ChatClient_Mock.swift */; };
 		7931818C24FD2660002F8C84 /* ChannelListController+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7931818B24FD2660002F8C84 /* ChannelListController+Combine.swift */; };
 		7931818E24FD4275002F8C84 /* ChannelListController+Combine_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7931818D24FD4275002F8C84 /* ChannelListController+Combine_Tests.swift */; };
+		7931AD3525B84F0D0081A118 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80437A9F252E4E87000920A3 /* Configuration.swift */; };
 		79330604256FEBE600FBB586 /* AdvancedOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79330603256FEBE600FBB586 /* AdvancedOptionsViewController.swift */; };
 		7933060B256FF94800FBB586 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7933060A256FF94800FBB586 /* ChatPresenter.swift */; };
 		7933064925712C8B00FBB586 /* DemoUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7933064825712C8B00FBB586 /* DemoUsers.swift */; };
@@ -1750,6 +1751,7 @@
 		792A4F23247FF01800EAF71D /* Sample_v3 */ = {
 			isa = PBXGroup;
 			children = (
+				79B7A9382592144A0092E802 /* SampleNotificationExtension */,
 				7951985C258B6E670012C470 /* Sample.entitlements */,
 				792A4F24247FF01800EAF71D /* AppDelegate.swift */,
 				8008C18824EEB8BD00F5BCCE /* LogStore.swift */,
@@ -2620,7 +2622,6 @@
 				799C9452247D59B1001F1104 /* Tests_v3 */,
 				792A4F23247FF01800EAF71D /* Sample_v3 */,
 				792DDA58256FB69E001DB91B /* DemoApp */,
-				79B7A9382592144A0092E802 /* SampleNotificationExtension */,
 				8AD5EC9022E9A3E8005CFAC9 /* Products */,
 				8AD5ECA722E9B3C4005CFAC9 /* Frameworks */,
 			);
@@ -3153,6 +3154,7 @@
 			projectRoot = "";
 			targets = (
 				792A4F21247FF01800EAF71D /* Sample */,
+				79B7A9362592144A0092E802 /* SampleNotificationExtension */,
 				799C941A247D2F80001F1104 /* StreamChat */,
 				799C9450247D59B1001F1104 /* StreamChatTests */,
 				793060E525778896005CF846 /* StreamChatTestTools */,
@@ -3160,7 +3162,6 @@
 				790881FC25432B7200896F03 /* StreamChatUI */,
 				7908820425432B7200896F03 /* StreamChatUITests */,
 				792DDA56256FB69E001DB91B /* DemoApp */,
-				79B7A9362592144A0092E802 /* SampleNotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -4009,6 +4010,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7931AD3525B84F0D0081A118 /* Configuration.swift in Sources */,
 				79B7A93A2592144A0092E802 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4641,11 +4643,11 @@
 		79B7A9402592144A0092E802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SampleNotificationExtension/SampleNotificationExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sample_v3/SampleNotificationExtension/SampleNotificationExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
-				INFOPLIST_FILE = SampleNotificationExtension/Info.plist;
+				INFOPLIST_FILE = Sample_v3/SampleNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4665,11 +4667,11 @@
 		79B7A9412592144A0092E802 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SampleNotificationExtension/SampleNotificationExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sample_v3/SampleNotificationExtension/SampleNotificationExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
-				INFOPLIST_FILE = SampleNotificationExtension/Info.plist;
+				INFOPLIST_FILE = Sample_v3/SampleNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4688,11 +4690,11 @@
 		79B7A9422592144A0092E802 /* ReleaseTests */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = SampleNotificationExtension/SampleNotificationExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sample_v3/SampleNotificationExtension/SampleNotificationExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
-				INFOPLIST_FILE = SampleNotificationExtension/Info.plist;
+				INFOPLIST_FILE = Sample_v3/SampleNotificationExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

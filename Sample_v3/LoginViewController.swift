@@ -33,24 +33,7 @@ class LoginViewController: UITableViewController {
             config: config,
             tokenProvider: tokenProvider,
             completion: {
-                if error == nil {
-                    DispatchQueue.main.async {
-                        // Add device token
-                        if let token = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken {
-                            currentUserController.addDevice(token: token) {
-                                _ = currentUserController
-                                if let error = $0 {
-                                    print("Failed to register APNS device token: \(error)")
-                                } else {
-                                    print("APNS token successfully added.")
-                                }
-                            }
-                        }
-                    }
-                }
-
                 guard let error = $0 else { return }
-
                 DispatchQueue.main.async {
                     let viewController = UIApplication.shared.keyWindow?.rootViewController
                     viewController?.alert(title: "Error", message: "Error logging in: \(error)") {
@@ -59,7 +42,18 @@ class LoginViewController: UITableViewController {
                 }
             }
         )
-        
+
+        if let token = (UIApplication.shared.delegate as? AppDelegate)?.deviceToken {
+            let controller = chatClient.currentUserController()
+            controller.addDevice(token: token) {
+                if let error = $0 {
+                    print("Failed to register APNS device token: \(error)")
+                } else {
+                    print("APNS token successfully added.")
+                }
+            }
+        }
+
         return chatClient
     }
 }

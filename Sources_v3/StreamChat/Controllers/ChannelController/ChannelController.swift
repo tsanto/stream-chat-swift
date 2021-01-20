@@ -135,6 +135,9 @@ public typealias ChatChannelController = _ChatChannelController<DefaultExtraData
 /// Learn more about using custom extra data in our [cheat sheet](https://github.com/GetStream/stream-chat-swift/wiki/StreamChat-SDK-Cheat-Sheet#working-with-extra-data).
 ///
 public class _ChatChannelController<ExtraData: ExtraDataTypes>: DataController, DelegateCallable, DataStoreProvider {
+    public typealias ChatClient = _ChatClient<ExtraData>
+    public typealias ChatChannel = _ChatChannel<ExtraData>
+
     /// The ChannelQuery this controller observes.
     @Atomic public private(set) var channelQuery: ChannelQuery<ExtraData>
     
@@ -155,14 +158,14 @@ public class _ChatChannelController<ExtraData: ExtraDataTypes>: DataController, 
     public var cid: ChannelId? { channelQuery.cid }
     
     /// The `ChatClient` instance this controller belongs to.
-    public let client: _ChatClient<ExtraData>
+    public let client: ChatClient
     
     /// The channel the controller represents.
     ///
     /// To observe changes of the channel, set your class as a delegate of this controller or use the provided
     /// `Combine` publishers.
     ///
-    public var channel: _ChatChannel<ExtraData>? {
+    public var channel: ChatChannel? {
         if state == .initialized {
             setLocalStateBasedOnError(startDatabaseObservers())
         }

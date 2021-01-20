@@ -242,6 +242,7 @@ public extension _CurrentChatUserController {
             }
         }
         let deviceId = token.deviceToken
+
         client
             .apiClient
             .request(
@@ -249,12 +250,13 @@ public extension _CurrentChatUserController {
                     userId: currentUserId,
                     deviceId: deviceId
                 ),
-                completion: { [weak client] result in
+                completion: { result in
                     if let error = result.error {
                         completion(error)
                         return
                     }
-                    client?.databaseContainer.write({ (session) in
+                    
+                    self.client.databaseContainer.write({ (session) in
                         try session.saveCurrentUserDevices([.init(id: deviceId)])
                     }) { completion($0) }
                 }

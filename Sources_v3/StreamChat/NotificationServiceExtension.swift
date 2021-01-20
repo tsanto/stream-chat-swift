@@ -1,14 +1,23 @@
 //
-// Copyright © 2020 Stream.io Inc. All rights reserved.
+// Copyright © 2021 Stream.io Inc. All rights reserved.
 //
 
 import UserNotifications
+
+public enum NotificationType<ExtraData> {
+    case newMessageNotification(_message: _ChatMessage<ExtraData>, channej)
+}
 
 open class StreamChatNotificationService<ExtraData: ExtraDataTypes>: UNNotificationServiceExtension {
     open var chatClient: _ChatClient<ExtraData> {
         fatalError("You need to provide a valid ChatClient in your subclass.")
     }
-    
+
+    open func handleIncomingNotification(
+        type: NotificationType<ExtraData>,
+        completion: @escaping (UNNotificationContent) -> Void
+    ) {}
+
     var bestAttemptContent: UNMutableNotificationContent?
     var contentHandler: ((UNNotificationContent) -> Void)?
     
