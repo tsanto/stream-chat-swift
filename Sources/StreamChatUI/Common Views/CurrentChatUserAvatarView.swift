@@ -26,7 +26,7 @@ open class CurrentChatUserAvatarView<ExtraData: ExtraDataTypes>: Control, UIConf
     // MARK: - Overrides
     
     override public func defaultAppearance() {
-        defaultIntrinsicContentSize = .init(width: 28, height: 28)
+        defaultIntrinsicContentSize = .init(width: 40, height: 40)
     }
     
     open var defaultIntrinsicContentSize: CGSize?

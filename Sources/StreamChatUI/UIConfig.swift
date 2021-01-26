@@ -61,6 +61,7 @@ public extension UIConfig {
         public var channelListAvatarOnlineIndicator: UIColor = .streamAccentGreen
         public var channelListUnreadCountView: UIColor = .streamAccentRed
         public var channelListUnreadCountLabel: UIColor = .streamWhite
+        public var channelListSeparatorView: UIColor = .streamGrayGainsboro
 
         // MARK: - Text interactions
 

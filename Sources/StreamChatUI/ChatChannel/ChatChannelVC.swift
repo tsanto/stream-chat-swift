@@ -36,7 +36,7 @@ open class ChatChannelVC<ExtraData: ExtraDataTypes>: ChatVC<ExtraData> {
 
         let avatar = ChatChannelAvatarView<ExtraData>()
         avatar.translatesAutoresizingMaskIntoConstraints = false
-        avatar.heightAnchor.pin(equalToConstant: 32).isActive = true
+        avatar.heightAnchor.pin(equalToConstant: 40).isActive = true
         avatar.channelAndUserId = (channel, channelController.client.currentUserId)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatar)
         navigationItem.largeTitleDisplayMode = .never

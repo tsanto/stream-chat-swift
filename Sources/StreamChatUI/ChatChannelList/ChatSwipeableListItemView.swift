@@ -18,6 +18,7 @@ open class ChatSwipeableListItemView<ExtraData: ExtraDataTypes>: View, UIConfigP
     public private(set) lazy var cellContentView: UIView = UIView().withoutAutoresizingMaskConstraints
     public private(set) lazy var deleteButton: UIButton = UIButton().withoutAutoresizingMaskConstraints
     public private(set) lazy var actionButtonStack: UIStackView = UIStackView().withoutAutoresizingMaskConstraints
+    public private(set) lazy var bottomSeparatorView: UIView = UIView().withoutAutoresizingMaskConstraints
 
     // MARK: - View
 
@@ -41,6 +42,12 @@ open class ChatSwipeableListItemView<ExtraData: ExtraDataTypes>: View, UIConfigP
         cellContentView.trailingAnchor.pin(equalTo: actionButtonStack.leadingAnchor).isActive = true
         trailingConstraint = trailingAnchor.pin(equalTo: cellContentView.trailingAnchor)
         trailingConstraint?.isActive = true
+
+        addSubview(bottomSeparatorView)
+
+        bottomSeparatorView.heightAnchor.pin(equalToConstant: 0.4).isActive = true
+
+        bottomSeparatorView.pin(anchors: [.bottom, .leading, .trailing], to: self)
     }
 
     override open func setUp() {
@@ -55,6 +62,7 @@ open class ChatSwipeableListItemView<ExtraData: ExtraDataTypes>: View, UIConfigP
 
     override public func defaultAppearance() {
         super.defaultAppearance()
+        bottomSeparatorView.backgroundColor = uiConfig.colorPalette.incomingMessageBubbleBorder
         deleteButton.setImage(UIImage(named: "icn_delete", in: .streamChatUI), for: .normal)
         deleteButton.backgroundColor = uiConfig.colorPalette.channelListActionsBackgroundColor
         deleteButton.tintColor = uiConfig.colorPalette.channelListActionDeleteChannel
