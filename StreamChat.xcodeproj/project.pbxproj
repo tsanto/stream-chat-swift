@@ -586,6 +586,7 @@
 		DAFAD6A124DC476A0043ED06 /* Result+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFAD6A024DC476A0043ED06 /* Result+Extensions.swift */; };
 		DAFAD6A324DD8E1A0043ED06 /* ChannelEditDetailPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFAD6A224DD8E1A0043ED06 /* ChannelEditDetailPayload.swift */; };
 		DAFC1D4724F50C5C00CE2DD8 /* NewChannelQueryUpdater_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFC1D4524F50C2C00CE2DD8 /* NewChannelQueryUpdater_Tests.swift */; };
+		DB28C9E025C05D6E007A1BFB /* LazyChannelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB28C9DF25C05D6E007A1BFB /* LazyChannelController.swift */; };
 		DB3CCF3F258CF7ED009D5E99 /* ChatMessageLinkPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3CCF3E258CF7ED009D5E99 /* ChatMessageLinkPreviewView.swift */; };
 		DB70CFF425701FE500DDF436 /* ChatChannelNavigationBarListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70CFF325701FE500DDF436 /* ChatChannelNavigationBarListener.swift */; };
 		DB70CFFB25702EB900DDF436 /* ChatMessagePopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70CFFA25702EB900DDF436 /* ChatMessagePopupVC.swift */; };
@@ -1340,6 +1341,7 @@
 		DAFAD6A024DC476A0043ED06 /* Result+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extensions.swift"; sourceTree = "<group>"; };
 		DAFAD6A224DD8E1A0043ED06 /* ChannelEditDetailPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEditDetailPayload.swift; sourceTree = "<group>"; };
 		DAFC1D4524F50C2C00CE2DD8 /* NewChannelQueryUpdater_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelQueryUpdater_Tests.swift; sourceTree = "<group>"; };
+		DB28C9DF25C05D6E007A1BFB /* LazyChannelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyChannelController.swift; sourceTree = "<group>"; };
 		DB3CCF3E258CF7ED009D5E99 /* ChatMessageLinkPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageLinkPreviewView.swift; sourceTree = "<group>"; };
 		DB70CFF325701FE500DDF436 /* ChatChannelNavigationBarListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatChannelNavigationBarListener.swift; sourceTree = "<group>"; };
 		DB70CFFA25702EB900DDF436 /* ChatMessagePopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessagePopupVC.swift; sourceTree = "<group>"; };
@@ -2684,6 +2686,7 @@
 			isa = PBXGroup;
 			children = (
 				799C944B247D5766001F1104 /* ChannelController.swift */,
+				DB28C9DF25C05D6E007A1BFB /* LazyChannelController.swift */,
 				7952B3B224D314B100AC53D4 /* ChannelController_Tests.swift */,
 				DAE566E624FFD22300E39431 /* ChannelController+SwiftUI.swift */,
 				DAE566E824FFD24000E39431 /* ChannelController+SwiftUI_Tests.swift */,
@@ -3660,6 +3663,7 @@
 				799C943B247D2FB9001F1104 /* MessageDTO.swift in Sources */,
 				88D85D97252F168000AE1030 /* MemberController+SwiftUI.swift in Sources */,
 				79877A0D2498E4BC00015F8B /* CurrentUser.swift in Sources */,
+				DB28C9E025C05D6E007A1BFB /* LazyChannelController.swift in Sources */,
 				DAE566F725010CA100E39431 /* ChannelWatchStateUpdater.swift in Sources */,
 				88D85D9A252F168B00AE1030 /* MemberController+Combine.swift in Sources */,
 				792A4F462480107A00EAF71D /* ChannelQuery.swift in Sources */,
@@ -4227,7 +4231,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
@@ -4240,7 +4245,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.getstream.iOS.ChatDemoApp;
 				PRODUCT_NAME = ChatSample;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.getstream.iOS.ChatDemoApp";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4252,8 +4257,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
@@ -4266,7 +4271,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.getstream.iOS.ChatDemoApp;
 				PRODUCT_NAME = ChatSample;
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc io.getstream.iOS.ChatDemoApp";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4278,7 +4283,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = EHV7XZLAHA;
 				DISABLE_DIAMOND_PROBLEM_DIAGNOSTIC = YES;
@@ -4291,7 +4297,7 @@
 				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.getstream.iOS.ChatDemoApp;
 				PRODUCT_NAME = ChatSample;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development io.getstream.iOS.ChatDemoApp";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
