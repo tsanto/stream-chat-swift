@@ -15,7 +15,7 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: ViewController,
     _ChatMessageComposerViewControllerDelegate {
     // MARK: - Properties
 
-    public var channelController: _ChatChannelController<ExtraData>!
+//    public var channelController: _ChatChannelController<ExtraData>!
     public var userSuggestionSearchController: _ChatUserSearchController<ExtraData>!
 
     public private(set) lazy var messageComposerViewController = uiConfig
@@ -49,7 +49,7 @@ open class _ChatVC<ExtraData: ExtraDataTypes>: ViewController,
         super.setUp()
 
         messageComposerViewController.delegate = .wrap(self)
-        messageComposerViewController.controller = channelController
+//        messageComposerViewController.controller = channelController
         messageComposerViewController.userSuggestionSearchController = userSuggestionSearchController
 
         messageList.delegate = .wrap(self)

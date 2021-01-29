@@ -30,7 +30,7 @@ open class _ChatThreadVC<ExtraData: ExtraDataTypes>: _ChatVC<ExtraData> {
     override func makeNavbarListener(
         _ handler: @escaping (ChatChannelNavigationBarListener<ExtraData>.NavbarData) -> Void
     ) -> ChatChannelNavigationBarListener<ExtraData>? {
-        let channelName = channelController.channel?.name ?? "love"
+        let channelName = "aaa" // channelController.channel?.name ?? "love"
         handler(ChatChannelNavigationBarListener<ExtraData>.NavbarData(title: "Thread Reply", subtitle: "with \(channelName)"))
         return nil
     }

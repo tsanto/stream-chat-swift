@@ -147,6 +147,26 @@ open class _ChatMessageListVC<ExtraData: ExtraDataTypes>: ViewController,
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .bottom, animated: animated)
     }
 
+    public func updateMessages(with changes: [ErasedChange], completion: ((Bool) -> Void)? = nil) {
+        collectionView.performBatchUpdates {
+            for change in changes {
+                switch change {
+                case let .insert(index):
+                    collectionView.insertItems(at: [index])
+                case let .move(fromIndex, toIndex):
+                    collectionView.moveItem(at: fromIndex, to: toIndex)
+                case let .remove(index):
+                    collectionView.deleteItems(at: [index])
+                case let .update(index):
+                    collectionView.reloadItems(at: [index])
+                }
+            }
+        } completion: { flag in
+            completion?(flag)
+            self.scrollToMostRecentMessageIfNeeded()
+        }
+    }
+
     public func updateMessages(with changes: [ListChange<_ChatMessage<ExtraData>>], completion: ((Bool) -> Void)? = nil) {
         collectionView.performBatchUpdates {
             for change in changes {

@@ -11,51 +11,56 @@ open class _ChatChannelVC<ExtraData: ExtraDataTypes>: _ChatVC<ExtraData> {
     // MARK: - Properties
 
     public private(set) lazy var router = uiConfig.navigation.channelDetailRouter.init(rootViewController: self)
+    public var controller: _LazyChatChannelController<ExtraData>!
     
     // MARK: - Life Cycle
     
     override open func setUp() {
         super.setUp()
 
-        channelController.setDelegate(self)
-        channelController.synchronize()
+        controller.setDelegate(self)
+        controller.synchronize()
     }
 
     override func makeNavbarListener(
         _ handler: @escaping (ChatChannelNavigationBarListener<ExtraData>.NavbarData) -> Void
     ) -> ChatChannelNavigationBarListener<ExtraData>? {
-        guard let channel = channelController.channel else { return nil }
-        let namer = uiConfig.messageList.channelNamer.init()
-        let navbarListener = ChatChannelNavigationBarListener.make(for: channel.cid, in: channelController.client, using: namer)
-        navbarListener.onDataChange = handler
-        return navbarListener
+        nil
+//        guard let channel = channelController.channel else { return nil }
+//        let namer = uiConfig.messageList.channelNamer.init()
+//        let navbarListener = ChatChannelNavigationBarListener.make(for: channel.cid, in: channelController.client, using: namer)
+//        navbarListener.onDataChange = handler
+//        return navbarListener
     }
 
     override public func defaultAppearance() {
         super.defaultAppearance()
 
-        guard let channel = channelController.channel else { return }
+        return
 
-        let avatar = _ChatChannelAvatarView<ExtraData>()
-        avatar.translatesAutoresizingMaskIntoConstraints = false
-        avatar.heightAnchor.pin(equalToConstant: 32).isActive = true
-        avatar.channelAndUserId = (channel, channelController.client.currentUserId)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatar)
-        navigationItem.largeTitleDisplayMode = .never
+//        guard let channel = channelController.channel else { return }
+//
+//        let avatar = _ChatChannelAvatarView<ExtraData>()
+//        avatar.translatesAutoresizingMaskIntoConstraints = false
+//        avatar.heightAnchor.pin(equalToConstant: 32).isActive = true
+//        avatar.channelAndUserId = (channel, channelController.client.currentUserId)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatar)
+//        navigationItem.largeTitleDisplayMode = .never
     }
 
     // MARK: - ChatMessageListVCDataSource
 
     override public func numberOfMessagesInChatMessageListVC(_ vc: _ChatMessageListVC<ExtraData>) -> Int {
-        channelController.messages.count
+        controller.numberOfItems
     }
 
     override public func chatMessageListVC(_ vc: _ChatMessageListVC<ExtraData>, messageAt index: Int) -> _ChatMessage<ExtraData> {
-        channelController.messages[index]
+        controller.item(at: index)!
     }
 
     override public func loadMoreMessagesForChatMessageListVC(_ vc: _ChatMessageListVC<ExtraData>) {
-        channelController.loadNextMessages()
+        controller.loadNextMessages()
+//        channelController.loadNextMessages()
     }
 
     override public func chatMessageListVC(
@@ -63,15 +68,15 @@ open class _ChatChannelVC<ExtraData: ExtraDataTypes>: _ChatVC<ExtraData> {
         replyMessageFor message: _ChatMessage<ExtraData>,
         at index: Int
     ) -> _ChatMessage<ExtraData>? {
-        message.quotedMessageId.flatMap { channelController.dataStore.message(id: $0) }
+        message.quotedMessageId.flatMap { controller.dataStore.message(id: $0) }
     }
 
     override public func chatMessageListVC(
         _ vc: _ChatMessageListVC<ExtraData>,
         controllerFor message: _ChatMessage<ExtraData>
     ) -> _ChatMessageController<ExtraData> {
-        channelController.client.messageController(
-            cid: channelController.cid!,
+        controller.client.messageController(
+            cid: controller.cid!,
             messageId: message.id
         )
     }
@@ -82,16 +87,16 @@ open class _ChatChannelVC<ExtraData: ExtraDataTypes>: _ChatVC<ExtraData> {
         _ vc: _ChatMessageListVC<ExtraData>,
         didTapOnRepliesFor message: _ChatMessage<ExtraData>
     ) {
-        router.showThreadDetail(for: message, within: channelController)
+//        router.showThreadDetail(for: message, within: channelController)
     }
 }
 
 // MARK: - _ChatChannelControllerDelegate
 
-extension _ChatChannelVC: _ChatChannelControllerDelegate {
-    public func channelController(
-        _ channelController: _ChatChannelController<ExtraData>,
-        didUpdateMessages changes: [ListChange<_ChatMessage<ExtraData>>]
+extension _ChatChannelVC: _LazyChatChannelControllerDelegate {
+    public func lazyChannelController(
+        _ channelController: _LazyChatChannelController<ExtraData>,
+        didUpdateMessages changes: [ErasedChange]
     ) {
         messageList.updateMessages(with: changes)
     }
