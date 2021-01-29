@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### ✅ Added
 - Add support for `enforce_unique` parameter on sending reactions 
     [#770](https://github.com/GetStream/stream-chat-swift/pull/770)
+
 ### 🔄 Changed
+- Changed default height value for non-sized message cels [#775](https://github.com/GetStream/stream-chat-swift/pull/775)
 
 ### 🐞 Fixed
 - Fix development token not working properly [#760](https://github.com/GetStream/stream-chat-swift/pull/760)
