@@ -3063,6 +3063,7 @@
 				79A4AE0F2536EE5500C32A74 /* XCRemoteSwiftPackageReference "Starscream" */,
 				799ADAAD2563FFA1006D43F9 /* XCRemoteSwiftPackageReference "Nuke" */,
 				DB823105259C271C00E7D7FE /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				AD472EF625C425FB00A96E70 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 8AD5EC9022E9A3E8005CFAC9 /* Products */;
 			projectDirPath = "";
@@ -4935,6 +4936,14 @@
 				minimumVersion = 4.0.4;
 			};
 		};
+		AD472EF625C425FB00A96E70 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.2;
+			};
+		};
 		DB823105259C271C00E7D7FE /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
@@ -4960,6 +4969,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79A4AE0F2536EE5500C32A74 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		AD472EF725C425FB00A96E70 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD472EF625C425FB00A96E70 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 		DB823106259C271C00E7D7FE /* SwiftyGif */ = {
 			isa = XCSwiftPackageProductDependency;
