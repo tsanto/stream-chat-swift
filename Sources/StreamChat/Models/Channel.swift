@@ -215,4 +215,9 @@ public struct ChannelUnreadCount: Decodable, Equatable {
     
     /// The number of unread messages that mention the current user.
     public internal(set) var mentionedMessages: Int
+    
+    public init(messages: Int, mentionedMessages: Int) {
+        self.messages = messages
+        self.mentionedMessages = mentionedMessages
+    }
 }
