@@ -1,5 +1,5 @@
 //
-// Copyright © 2020 Stream.io Inc. All rights reserved.
+// Copyright © 2021 Stream.io Inc. All rights reserved.
 //
 
 import Foundation
@@ -11,23 +11,7 @@ public extension _ChatClient {
         var config = ChatClientConfig(apiKey: .init("--== Mock ChatClient ==--"))
         config.isLocalStorageEnabled = false
         
-        return .init(
-            config: config,
-            workerBuilders: [],
-            environment: .init(
-                apiClientBuilder: APIClient_Mock.init,
-                webSocketClientBuilder: {
-                    WebSocketClient_Mock(
-                        connectEndpoint: $0,
-                        sessionConfiguration: $1,
-                        requestEncoder: $2,
-                        eventDecoder: $3,
-                        eventNotificationCenter: $4,
-                        internetConnection: $5
-                    )
-                }
-            )
-        )
+        return .init(config: config, tokenProvider: .development(userId: .anonymous))
     }
 }
 
