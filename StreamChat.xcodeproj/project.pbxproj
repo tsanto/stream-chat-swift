@@ -513,6 +513,28 @@
 		AD46C4E325C431EE00B405F8 /* ChatChannelListVC_SnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD46C4DA25C431C500B405F8 /* ChatChannelListVC_SnapshotTests.swift */; };
 		AD472EF825C425FB00A96E70 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AD472EF725C425FB00A96E70 /* SnapshotTesting */; };
 		AD7D633325AF577E0051219B /* UserUpdateResponse+MissingUser.json in Resources */ = {isa = PBXBuildFile; fileRef = AD7D633225AF577E0051219B /* UserUpdateResponse+MissingUser.json */; };
+		AD9F7B7525C820E700DF8CD2 /* MockAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F7B5A25C820AD00DF8CD2 /* MockAvatarView.swift */; };
+		AD9F7B7D25C8215400DF8CD2 /* SnapshotVariation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F7B7C25C8215400DF8CD2 /* SnapshotVariation.swift */; };
+		AD9F7B8625C821C300DF8CD2 /* AssertSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F7B8525C821C300DF8CD2 /* AssertSnapshot.swift */; };
+		AD9F7BA025C83B6500DF8CD2 /* MockCurrentChatUserAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F7B9F25C83B6500DF8CD2 /* MockCurrentChatUserAvatarView.swift */; };
+		ADCAA31D25C473C0003BE403 /* ChatMessageController_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793061712577BB48005CF846 /* ChatMessageController_Mock.swift */; };
+		ADCAA31E25C473C0003BE403 /* ChatChannel_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306135257798FC005CF846 /* ChatChannel_Mock.swift */; };
+		ADCAA31F25C473C0003BE403 /* ChannelListController_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930610E25778C37005CF846 /* ChannelListController_Mock.swift */; };
+		ADCAA32025C473C0003BE403 /* ChatChannelMember_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793061562577A336005CF846 /* ChatChannelMember_Mock.swift */; };
+		ADCAA32125C473C0003BE403 /* ChatChannelController_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793061682577B511005CF846 /* ChatChannelController_Mock.swift */; };
+		ADCAA32225C473C0003BE403 /* ChatUser_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930614D2577A1AE005CF846 /* ChatUser_Mock.swift */; };
+		ADCAA32325C473C0003BE403 /* ChatClient_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793061A02577C8B4005CF846 /* ChatClient_Mock.swift */; };
+		ADCAA32425C473C0003BE403 /* ChatMessage_Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930615F2577A39D005CF846 /* ChatMessage_Mock.swift */; };
+		ADCAA33125C48DDA003BE403 /* TestDispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792921CA24C077B400116BBB /* TestDispatchQueue.swift */; };
+		ADCAA33225C48DDA003BE403 /* RandomDispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B805324D95FC700C2963E /* RandomDispatchQueue.swift */; };
+		ADCAA33525C48DDA003BE403 /* QueueAwareDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792921CC24C07A9000116BBB /* QueueAwareDelegate.swift */; };
+		ADCAA33725C48DDA003BE403 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C947B247E6051001F1104 /* TestError.swift */; };
+		ADCAA33825C48DDA003BE403 /* JSONEncoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84074A2526417B005A0F62 /* JSONEncoder+Extensions.swift */; };
+		ADCAA33A25C48DDA003BE403 /* StressTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988F6B624D15F100004219B /* StressTestCase.swift */; };
+		ADCAA33B25C48DDA003BE403 /* XCTAssertEqual+Difference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A62706924BF02D80040BFD6 /* XCTAssertEqual+Difference.swift */; };
+		ADCAA33C25C48DDA003BE403 /* TestRunnerEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988F6B024D010890004219B /* TestRunnerEnvironment.swift */; };
+		ADCAA33D25C48DDA003BE403 /* Await.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799C9461247D78E2001F1104 /* Await.swift */; };
+		ADCAA33E25C48DDA003BE403 /* iOS13TestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79200D41250118A1002F4EB1 /* iOS13TestCase.swift */; };
 		ADCDDCC525AE1293004E15FB /* UserUpdateResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = ADCDDCC425AE1293004E15FB /* UserUpdateResponse.json */; };
 		ADCDDD0025AE2784004E15FB /* UserUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDCEC25AE2214004E15FB /* UserUpdateViewController.swift */; };
 		ADCDDD0825AE2F4A004E15FB /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCDDD0725AE2F4A004E15FB /* InputViewController.swift */; };
@@ -3454,7 +3476,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7908823C25432C9000896F03 /* StreamChatUITests.swift in Sources */,
+				ADCAA31D25C473C0003BE403 /* ChatMessageController_Mock.swift in Sources */,
+				ADCAA33525C48DDA003BE403 /* QueueAwareDelegate.swift in Sources */,
+				AD9F7BA025C83B6500DF8CD2 /* MockCurrentChatUserAvatarView.swift in Sources */,
+				ADCAA33725C48DDA003BE403 /* TestError.swift in Sources */,
+				AD9F7B8625C821C300DF8CD2 /* AssertSnapshot.swift in Sources */,
+				ADCAA33B25C48DDA003BE403 /* XCTAssertEqual+Difference.swift in Sources */,
+				AD46C4E325C431EE00B405F8 /* ChatChannelListVC_SnapshotTests.swift in Sources */,
+				ADCAA31F25C473C0003BE403 /* ChannelListController_Mock.swift in Sources */,
+				ADCAA32125C473C0003BE403 /* ChatChannelController_Mock.swift in Sources */,
+				ADCAA32425C473C0003BE403 /* ChatMessage_Mock.swift in Sources */,
+				AD9F7B7D25C8215400DF8CD2 /* SnapshotVariation.swift in Sources */,
+				ADCAA33825C48DDA003BE403 /* JSONEncoder+Extensions.swift in Sources */,
+				ADCAA33225C48DDA003BE403 /* RandomDispatchQueue.swift in Sources */,
+				ADCAA33C25C48DDA003BE403 /* TestRunnerEnvironment.swift in Sources */,
+				AD9F7B7525C820E700DF8CD2 /* MockAvatarView.swift in Sources */,
+				ADCAA31E25C473C0003BE403 /* ChatChannel_Mock.swift in Sources */,
+				ADCAA33E25C48DDA003BE403 /* iOS13TestCase.swift in Sources */,
+				ADCAA32225C473C0003BE403 /* ChatUser_Mock.swift in Sources */,
+				ADCAA32025C473C0003BE403 /* ChatChannelMember_Mock.swift in Sources */,
+				ADCAA33D25C48DDA003BE403 /* Await.swift in Sources */,
+				ADCAA33125C48DDA003BE403 /* TestDispatchQueue.swift in Sources */,
+				ADCAA32325C473C0003BE403 /* ChatClient_Mock.swift in Sources */,
+				ADCAA33A25C48DDA003BE403 /* StressTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
